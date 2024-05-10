@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yz7-qY-e8d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jjm-hw-Br2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -439,6 +439,61 @@
             </objects>
             <point key="canvasLocation" x="1161" y="858"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="Xpc-NF-kAL">
+            <objects>
+                <tableViewController storyboardIdentifier="TableViewController" id="Dcp-4p-ekX" customClass="TableViewController" customModule="projectPlayground" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Ion-Fk-hgT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeagueCell" rowHeight="100" id="qq0-g4-eHQ" userLabel="Lea" customClass="LeagueTableViewCell" customModule="projectPlayground" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qq0-g4-eHQ" id="O69-qq-HM0">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eGl-RD-6Zc">
+                                            <rect key="frame" x="20" y="19" width="67" height="62"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rim-ID-OOL">
+                                            <rect key="frame" x="131" y="37" width="263" height="26"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="Rim-ID-OOL" firstAttribute="leading" secondItem="O69-qq-HM0" secondAttribute="leading" constant="131" id="26a-WZ-H0t"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="eGl-RD-6Zc" secondAttribute="bottom" constant="8" id="388-Uz-OuX"/>
+                                        <constraint firstItem="eGl-RD-6Zc" firstAttribute="leading" secondItem="O69-qq-HM0" secondAttribute="leadingMargin" id="Jjr-PA-1Wc"/>
+                                        <constraint firstItem="Rim-ID-OOL" firstAttribute="top" secondItem="O69-qq-HM0" secondAttribute="topMargin" constant="26" id="Vm9-56-D3V"/>
+                                        <constraint firstItem="Rim-ID-OOL" firstAttribute="centerY" secondItem="eGl-RD-6Zc" secondAttribute="centerY" id="eWz-lW-4V4"/>
+                                        <constraint firstItem="eGl-RD-6Zc" firstAttribute="top" secondItem="O69-qq-HM0" secondAttribute="topMargin" constant="8" id="f9I-0V-qeh"/>
+                                        <constraint firstItem="Rim-ID-OOL" firstAttribute="leading" secondItem="eGl-RD-6Zc" secondAttribute="trailing" constant="44" id="h4H-R4-PTL"/>
+                                        <constraint firstItem="eGl-RD-6Zc" firstAttribute="centerY" secondItem="O69-qq-HM0" secondAttribute="centerY" id="nYW-Tw-K6K"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Rim-ID-OOL" secondAttribute="trailing" id="yRv-NN-mjr"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leagueLogoImageView" destination="eGl-RD-6Zc" id="HiA-Md-vms"/>
+                                    <outlet property="leagueNameLabel" destination="Rim-ID-OOL" id="Xj1-J7-3uZ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Dcp-4p-ekX" id="NM4-dM-6xl"/>
+                            <outlet property="delegate" destination="Dcp-4p-ekX" id="Ko0-ON-6pM"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FPy-jv-RyU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2793" y="812"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Facebook_Logo_(2019)" width="1200" height="1200"/>
@@ -450,6 +505,9 @@
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
