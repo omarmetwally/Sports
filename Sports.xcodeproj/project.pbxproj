@@ -101,10 +101,6 @@
 		07B62F792BECC75400A2814B /* Sports */ = {
 			isa = PBXGroup;
 			children = (
-				07B62FB02BEE44E500A2814B /* Utilities */,
-				07B62FAF2BEE44D800A2814B /* Services */,
-				07B62FAE2BEE44C300A2814B /* Modules */,
-				07B62FAD2BEE44BD00A2814B /* Model */,
 				07B62F7A2BECC75400A2814B /* AppDelegate.swift */,
 				07B62F7C2BECC75400A2814B /* SceneDelegate.swift */,
 				07B62F7E2BECC75400A2814B /* ViewController.swift */,
@@ -132,34 +128,6 @@
 				07B62FA02BECC75B00A2814B /* SportsUITestsLaunchTests.swift */,
 			);
 			path = SportsUITests;
-			sourceTree = "<group>";
-		};
-		07B62FAD2BEE44BD00A2814B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		07B62FAE2BEE44C300A2814B /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		07B62FAF2BEE44D800A2814B /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		07B62FB02BEE44E500A2814B /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
