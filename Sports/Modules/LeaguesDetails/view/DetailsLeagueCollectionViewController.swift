@@ -9,16 +9,25 @@ import UIKit
 
 class DetailsLeagueCollectionViewController: UICollectionViewController {
     var viewModel: DetailsLeagueViewModel!
+    private var activityIndicator: UIActivityIndicatorView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator = Helper.setupActivityIndicator(in: self.collectionView)
+        activityIndicator.startAnimating()
+        
         setupCompositionalLayout()
         fetchEventData()
+        
+        
     }
 
     func fetchEventData() {
         viewModel.fetchEvents {
             self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
+
         }
     }
 
