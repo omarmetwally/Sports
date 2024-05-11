@@ -14,8 +14,8 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupActivityIndicator()
+        self.navigationItem.title="Leagues"
+        activityIndicator = Helper.setupActivityIndicator(in: self.tableView)
         activityIndicator.startAnimating()
 
     }
@@ -28,17 +28,7 @@ class TableViewController: UITableViewController {
                self.activityIndicator.stopAnimating()
            }
        }
-    
-    private func setupActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        tableView.addSubview(activityIndicator)
-
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
-        ])
-    }
+  
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -72,9 +62,9 @@ class TableViewController: UITableViewController {
 
         let selectedLeague = viewModel.leagues[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
-            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), leagueId: String(selectedLeague.leagueKey))
+            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), leagueId: String(selectedLeague.leagueKey),sportName: viewModel.sport)
             let navigationController = UINavigationController(rootViewController: detailsVC)
-            navigationController.modalPresentationStyle = .fullScreen
+            navigationController.modalPresentationStyle = .popover
             self.present(navigationController, animated: true, completion: nil)
         }
     }
