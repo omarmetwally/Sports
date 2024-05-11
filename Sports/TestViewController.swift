@@ -11,11 +11,22 @@ class TestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
     }
     
 
+        
+    @IBAction func act(_ sender: Any) {
+        let screen = storyboard?.instantiateViewController(withIdentifier: "teamdetails") as! TeamPlayersTableViewController
+        let viewModel = TeamViewModel.init(network: NetworkServices(), sport: Sport.football, id: 94)
+        screen.viewModel=viewModel
+        
+        navigationController?.pushViewController(screen, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

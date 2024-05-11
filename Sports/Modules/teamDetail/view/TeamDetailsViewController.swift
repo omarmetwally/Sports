@@ -19,6 +19,11 @@ class TeamDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let viewModel = TeamViewModel.init(network: NetworkServices(), sport: .football, id: 15)
+        viewModel.fetchData {
+            self.teamNameLabel.text=viewModel.getTeam()?.teamName
+            print(viewModel.getTeam()?.teamName ?? "NO Player")
+        }
         
         let tableViewController = children[0] as? DetailsDelegate
         tableViewController?.updateLeague(val: "kolotmam")

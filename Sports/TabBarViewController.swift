@@ -9,7 +9,6 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
-    @IBOutlet weak var favButton: UIBarButtonItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,7 +16,7 @@ class TabBarViewController: UITabBarController {
     }
     
 
-    /*
+    /*d
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -26,7 +25,5 @@ class TabBarViewController: UITabBarController {
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func favButtonAction(_ sender: Any) {
-    }
-    
+  
 }
