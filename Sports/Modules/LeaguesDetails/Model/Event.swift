@@ -36,6 +36,8 @@ struct Event: Codable {
         case secondPlayer = "event_second_player"
         case firstPlayerLogo = "event_first_player_logo"
         case secondPlayerLogo = "event_second_player_logo"
+        case eventHomeTeamLogo = "event_home_team_logo"
+        case eventAwayTeamLogo = "event_away_team_logo"
     }
     
     init(from decoder: Decoder) throws {
@@ -45,16 +47,21 @@ struct Event: Codable {
         eventTime = try container.decode(String.self, forKey: .eventTime)
         finalResult = try container.decode(String.self, forKey: .finalResult)
         
-        if let homeTeam = try container.decodeIfPresent(String.self, forKey: .homeTeam) {
-            self.homeTeam = homeTeam
+        if let homeTeamLogo = try container.decodeIfPresent(URL.self, forKey: .awayTeamLogo) {
+            self.homeTeam = try container.decode(String.self, forKey: .homeTeam)
             self.awayTeam = try container.decode(String.self, forKey: .awayTeam)
-            self.homeTeamLogo = try container.decodeIfPresent(URL.self, forKey: .homeTeamLogo)
-            self.awayTeamLogo = try container.decodeIfPresent(URL.self, forKey: .awayTeamLogo)
-        } else {
-            self.homeTeam = try container.decode(String.self, forKey: .firstPlayer)
+            self.homeTeamLogo = homeTeamLogo
+            self.awayTeamLogo = try container.decodeIfPresent(URL.self, forKey: .homeTeamLogo)
+        } else if let firstPlayer = try container.decodeIfPresent(String.self, forKey: .firstPlayer) {
+            self.homeTeam = firstPlayer
             self.awayTeam = try container.decode(String.self, forKey: .secondPlayer)
             self.homeTeamLogo = try container.decodeIfPresent(URL.self, forKey: .firstPlayerLogo)
             self.awayTeamLogo = try container.decodeIfPresent(URL.self, forKey: .secondPlayerLogo)
+        }else{
+            self.homeTeam = try container.decode(String.self, forKey: .homeTeam)
+            self.awayTeam = try container.decode(String.self, forKey: .awayTeam)
+            self.homeTeamLogo = try container.decodeIfPresent(URL.self, forKey: .eventAwayTeamLogo)
+            self.awayTeamLogo = try container.decodeIfPresent(URL.self, forKey: .eventHomeTeamLogo)
         }
     }
     
