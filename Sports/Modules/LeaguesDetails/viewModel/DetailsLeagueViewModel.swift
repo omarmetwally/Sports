@@ -10,6 +10,7 @@ import Foundation
 
 class DetailsLeagueViewModel {
     var events: [Event] = []
+    var latestResults: [Event] = []
     private let networkService: NetworkProtocol
     private let leagueId: String
     private let sportName: Sport
@@ -32,6 +33,27 @@ class DetailsLeagueViewModel {
                 switch result {
                 case .success(let eventsResponse):
                     self?.events = eventsResponse.result.reversed()
+                    completion()
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    completion()
+                }
+            }
+        }
+    }
+    
+    func fetchLatestResults(completion: @escaping () -> Void) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let endDate = dateFormatter.string(from: Date())
+        let startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -5, to: Date())!)
+
+        let endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
+        networkService.fetchData(sport: sportName, endpoint: endpoint, decodingType: EventsResponse.self) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let eventsResponse):
+                    self?.latestResults = eventsResponse.result
                     completion()
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")

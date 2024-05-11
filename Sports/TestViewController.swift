@@ -21,7 +21,7 @@ class TestViewController: UIViewController {
         
     @IBAction func act(_ sender: Any) {
         let screen = storyboard?.instantiateViewController(withIdentifier: "teamdetails") as! TeamPlayersTableViewController
-        let viewModel = TeamViewModel.init(network: NetworkServices(), sport: Sport.football, id: 94)
+        let viewModel = TeamViewModel.init(network: NetworkServices(), sport: Sport.football, id: 30)
         screen.viewModel=viewModel
         
         navigationController?.pushViewController(screen, animated: true)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jjm-hw-Br2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hoz-JP-oLR">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -720,11 +720,19 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzO-Ae-hYv">
+                                            <rect key="frame" x="105" y="47" width="44.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="acy-cw-Se2" firstAttribute="top" secondItem="Wfy-gA-1qN" secondAttribute="bottom" constant="8" symbolic="YES" id="41m-R0-aza"/>
                                         <constraint firstItem="Ep4-9B-vI4" firstAttribute="leading" secondItem="14y-MM-Jyg" secondAttribute="trailing" priority="250" constant="28" id="71Z-sR-xgQ"/>
                                         <constraint firstItem="LZa-xG-CRA" firstAttribute="leading" secondItem="14y-MM-Jyg" secondAttribute="trailing" priority="250" constant="28" id="74r-Xy-Bzc"/>
+                                        <constraint firstItem="gzO-Ae-hYv" firstAttribute="top" secondItem="Ep4-9B-vI4" secondAttribute="bottom" constant="18" id="9pP-Fl-cRJ"/>
+                                        <constraint firstItem="gzO-Ae-hYv" firstAttribute="leading" secondItem="14y-MM-Jyg" secondAttribute="trailing" priority="250" constant="28" id="AA8-WL-bYh"/>
                                         <constraint firstItem="Wfy-gA-1qN" firstAttribute="top" secondItem="TOT-Hb-VNr" secondAttribute="top" constant="29" id="GFE-cJ-ZNH"/>
                                         <constraint firstItem="LZa-xG-CRA" firstAttribute="centerX" secondItem="TOT-Hb-VNr" secondAttribute="centerX" id="GiG-XO-flw"/>
                                         <constraint firstItem="0gV-s2-0XS" firstAttribute="leading" secondItem="TOT-Hb-VNr" secondAttribute="leading" priority="250" constant="10" id="Goc-nZ-UiJ"/>
@@ -733,6 +741,8 @@
                                         <constraint firstItem="0gV-s2-0XS" firstAttribute="top" secondItem="14y-MM-Jyg" secondAttribute="bottom" constant="8" symbolic="YES" id="NsH-Te-APQ"/>
                                         <constraint firstItem="Wfy-gA-1qN" firstAttribute="leading" secondItem="Ep4-9B-vI4" secondAttribute="trailing" priority="250" constant="26.5" id="Oal-gC-vNo"/>
                                         <constraint firstItem="14y-MM-Jyg" firstAttribute="top" secondItem="TOT-Hb-VNr" secondAttribute="top" constant="29" id="PaI-gj-lSG"/>
+                                        <constraint firstItem="gzO-Ae-hYv" firstAttribute="centerX" secondItem="TOT-Hb-VNr" secondAttribute="centerX" id="RSm-fO-QOq"/>
+                                        <constraint firstItem="LZa-xG-CRA" firstAttribute="top" secondItem="gzO-Ae-hYv" secondAttribute="bottom" constant="8" symbolic="YES" id="SP4-9o-abx"/>
                                         <constraint firstItem="Ep4-9B-vI4" firstAttribute="top" secondItem="TOT-Hb-VNr" secondAttribute="top" constant="8" id="VAQ-4P-rCY"/>
                                         <constraint firstAttribute="trailing" secondItem="Wfy-gA-1qN" secondAttribute="trailing" constant="22" id="VDf-54-riO"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0gV-s2-0XS" secondAttribute="trailing" priority="250" id="X7o-nA-GLb"/>
@@ -743,6 +753,7 @@
                                         <constraint firstItem="Wfy-gA-1qN" firstAttribute="leading" secondItem="LZa-xG-CRA" secondAttribute="trailing" priority="250" constant="26" id="eWk-sa-boR"/>
                                         <constraint firstItem="LZa-xG-CRA" firstAttribute="top" secondItem="Ep4-9B-vI4" secondAttribute="bottom" constant="47" id="gbA-wt-4I0"/>
                                         <constraint firstAttribute="trailing" secondItem="acy-cw-Se2" secondAttribute="trailing" priority="250" constant="10" id="iv4-vt-8ZX"/>
+                                        <constraint firstItem="Wfy-gA-1qN" firstAttribute="leading" secondItem="gzO-Ae-hYv" secondAttribute="trailing" priority="250" constant="26" id="lsy-x0-7Uw"/>
                                         <constraint firstItem="acy-cw-Se2" firstAttribute="leading" secondItem="TOT-Hb-VNr" secondAttribute="leading" priority="250" constant="190" id="xG2-Hw-Grr"/>
                                     </constraints>
                                     <variation key="default">
@@ -761,6 +772,7 @@
                                     <outlet property="eventTimeLabel" destination="LZa-xG-CRA" id="Mao-EC-uL7"/>
                                     <outlet property="homeTeamLogoImageView" destination="14y-MM-Jyg" id="EKs-e3-a59"/>
                                     <outlet property="homeTeamNameLabel" destination="acy-cw-Se2" id="ulf-th-mUE"/>
+                                    <outlet property="scoreLabel" destination="gzO-Ae-hYv" id="Stf-5x-Ry8"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -772,7 +784,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="64p-ct-WJR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="358" y="2371"/>
+            <point key="canvasLocation" x="239" y="2362"/>
         </scene>
     </scenes>
     <resources>

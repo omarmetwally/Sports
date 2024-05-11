@@ -23,3 +23,9 @@ struct Constants {
         return "https://apiv2.allsportsapi.com/\(sport.rawValue)/"
     }
 }
+
+enum SectionType: Int, CaseIterable {
+    case upcomingEvents
+    case latestResults
+    case teams
+}

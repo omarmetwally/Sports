@@ -19,6 +19,7 @@ struct Event: Codable {
     var eventTime: String
     var homeTeam: String
     var awayTeam: String
+    var finalResult: String
     var homeTeamLogo: URL?
     var awayTeamLogo: URL?
     
@@ -28,6 +29,7 @@ struct Event: Codable {
         case eventTime = "event_time"
         case homeTeam = "event_home_team"
         case awayTeam = "event_away_team"
+        case finalResult = "event_final_result"
         case homeTeamLogo = "home_team_logo"
         case awayTeamLogo = "away_team_logo"
         case firstPlayer = "event_first_player"
@@ -41,6 +43,7 @@ struct Event: Codable {
         eventKey = try container.decode(Int.self, forKey: .eventKey)
         eventDate = try container.decode(String.self, forKey: .eventDate)
         eventTime = try container.decode(String.self, forKey: .eventTime)
+        finalResult = try container.decode(String.self, forKey: .finalResult)
         
         if let homeTeam = try container.decodeIfPresent(String.self, forKey: .homeTeam) {
             self.homeTeam = homeTeam
@@ -60,6 +63,7 @@ struct Event: Codable {
         try container.encode(eventKey, forKey: .eventKey)
         try container.encode(eventDate, forKey: .eventDate)
         try container.encode(eventTime, forKey: .eventTime)
+        try container.encode(finalResult, forKey: .finalResult)
         try container.encode(homeTeam, forKey: .homeTeam)
         try container.encode(awayTeam, forKey: .awayTeam)
         try container.encode(homeTeamLogo, forKey: .homeTeamLogo)

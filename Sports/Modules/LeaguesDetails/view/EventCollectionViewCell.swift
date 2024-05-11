@@ -17,6 +17,7 @@ class EventCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var awayTeamLogoImageView: UIImageView!
     
     @IBOutlet weak var homeTeamNameLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     func configure(with event: Event) {
         
         
@@ -27,6 +28,7 @@ class EventCollectionViewCell: UICollectionViewCell {
         homeTeamNameLabel.text=event.homeTeam
         eventDateLabel.text = event.eventDate
         eventTimeLabel.text = event.eventTime
+        scoreLabel.text=event.finalResult
 //        homeTeamLogoImageView.kf.setImage(with: event.homeTeamLogo)
 //        awayTeamLogoImageView.kf.setImage(with: event.awayTeamLogo)
         
