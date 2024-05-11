@@ -41,6 +41,7 @@
 		BB5D296C2BEF5C7400C0A0F3 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D296B2BEF5C7400C0A0F3 /* TeamCell.swift */; };
 		BB5D296E2BEF5C8500C0A0F3 /* PlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D296D2BEF5C8500C0A0F3 /* PlayerCell.swift */; };
 		BB5D29702BEF68C100C0A0F3 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D296F2BEF68C100C0A0F3 /* TestViewController.swift */; };
+		BB81FA882BEFBDE2000385C1 /* CoreDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81FA872BEFBDE2000385C1 /* CoreDataServices.swift */; };
 		BBDE73572BEE522300CA5E04 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE73562BEE522300CA5E04 /* TabBarViewController.swift */; };
 		BBDE73592BEE5A0900CA5E04 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE73582BEE5A0900CA5E04 /* HomeViewController.swift */; };
 		BBDE735B2BEE60D700CA5E04 /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE735A2BEE60D700CA5E04 /* TeamDetailsViewController.swift */; };
@@ -101,6 +102,7 @@
 		BB5D296B2BEF5C7400C0A0F3 /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		BB5D296D2BEF5C8500C0A0F3 /* PlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCell.swift; sourceTree = "<group>"; };
 		BB5D296F2BEF68C100C0A0F3 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		BB81FA872BEFBDE2000385C1 /* CoreDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServices.swift; sourceTree = "<group>"; };
 		BBDE73562BEE522300CA5E04 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BBDE73582BEE5A0900CA5E04 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BBDE735A2BEE60D700CA5E04 /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				07B630032BEEA5A700A2814B /* NetworkServices.swift */,
+				BB81FA872BEFBDE2000385C1 /* CoreDataServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				BBDE735D2BEE677300CA5E04 /* SportsCollectionViewCell.swift in Sources */,
 				BB5D29612BEF455300C0A0F3 /* TeamResponse.swift in Sources */,
 				BBDE73572BEE522300CA5E04 /* TabBarViewController.swift in Sources */,
+				BB81FA882BEFBDE2000385C1 /* CoreDataServices.swift in Sources */,
 				BB16A6272BEE810300E201A4 /* DetailsDelegate.swift in Sources */,
 				BB16A6252BEE7FD100E201A4 /* DetailListTableViewController.swift in Sources */,
 				07B62F7D2BECC75400A2814B /* SceneDelegate.swift in Sources */,

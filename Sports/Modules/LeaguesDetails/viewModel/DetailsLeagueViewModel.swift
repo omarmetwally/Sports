@@ -13,12 +13,16 @@ class DetailsLeagueViewModel {
     var latestResults: [Event] = []
     private let networkService: NetworkProtocol
     private let leagueId: String
+    private let league:League
     private let sportName: Sport
+    private let coreDataService:CoreDataProtocol
 
-    init(networkService: NetworkProtocol, leagueId: String,sportName:Sport) {
+    init(networkService: NetworkProtocol,coreDataService : CoreDataProtocol, leagueId: String,sportName:Sport,league:League) {
         self.networkService = networkService
+        self.coreDataService=coreDataService
         self.leagueId = leagueId
         self.sportName=sportName
+        self.league=league
     }
 
     func fetchEvents(completion: @escaping () -> Void) {
@@ -61,5 +65,11 @@ class DetailsLeagueViewModel {
                 }
             }
         }
+    }
+    func addToFav(){
+        coreDataService.addLeague(league: league )
+    }
+    func isStored()->Bool{
+       return coreDataService.isLeagueSaved(leagueId: Int(leagueId) ?? 0)
     }
 }

@@ -8,22 +8,22 @@
 import Foundation
 // MARK: - Player
 struct Player: Codable {
-    let playerKey: Int
-    let playerImage: String
-    let playerName, playerNumber: String
+    let playerKey: Int?
+    let playerImage: String?
+    let playerName, playerNumber: String?
     let playerCountry: JSONNull?
-    let playerType: PlayerType
-    let playerAge, playerMatchPlayed, playerGoals, playerYellowCards: String
-    let playerRedCards: String
-    let playerInjured: PlayerInjured
-    let playerSubstituteOut, playerSubstitutesOnBench, playerAssists, playerBirthdate: String
-    let playerIsCaptain, playerShotsTotal, playerGoalsConceded, playerFoulsCommitted: String
-    let playerTackles, playerBlocks, playerCrossesTotal, playerInterceptions: String
-    let playerClearances, playerDispossesed, playerSaves, playerInsideBoxSaves: String
-    let playerDuelsTotal, playerDuelsWon, playerDribbleAttempts, playerDribbleSucc: String
-    let playerPenComm, playerPenWon, playerPenScored, playerPenMissed: String
-    let playerPasses, playerPassesAccuracy, playerKeyPasses, playerWoordworks: String
-    let playerRating: String
+    let playerType: PlayerType?
+    let playerAge, playerMatchPlayed, playerGoals, playerYellowCards: String?
+    let playerRedCards: String?
+    let playerInjured: PlayerInjured?
+    let playerSubstituteOut, playerSubstitutesOnBench, playerAssists, playerBirthdate: String?
+    let playerIsCaptain, playerShotsTotal, playerGoalsConceded, playerFoulsCommitted: String?
+    let playerTackles, playerBlocks, playerCrossesTotal, playerInterceptions: String?
+    let playerClearances, playerDispossesed, playerSaves, playerInsideBoxSaves: String?
+    let playerDuelsTotal, playerDuelsWon, playerDribbleAttempts, playerDribbleSucc: String?
+    let playerPenComm, playerPenWon, playerPenScored, playerPenMissed: String?
+    let playerPasses, playerPassesAccuracy, playerKeyPasses, playerWoordworks: String?
+    let playerRating: String?
 
     enum CodingKeys: String, CodingKey {
         case playerKey = "player_key"

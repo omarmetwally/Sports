@@ -8,7 +8,7 @@
 import Foundation
 // MARK: - Coach
 struct Coach: Codable {
-    let coachName: String
+    let coachName: String?
     let coachCountry, coachAge: JSONNull?
 
     enum CodingKeys: String, CodingKey {

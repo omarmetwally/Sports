@@ -59,10 +59,15 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appdelegate.persistentContainer.viewContext
 
         let selectedLeague = viewModel.leagues[indexPath.row]
         if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
-            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), leagueId: String(selectedLeague.leagueKey),sportName: viewModel.sport)
+            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(),coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey),sportName: viewModel.sport,league: selectedLeague)
+            
+            
             let navigationController = UINavigationController(rootViewController: detailsVC)
             navigationController.modalPresentationStyle = .popover
             self.present(navigationController, animated: true, completion: nil)

@@ -60,9 +60,9 @@ class TeamPlayersTableViewController: UITableViewController {
             var curr = viewModel.getPlayerAtIndex(i: indexPath.row-1)
             
             cell.numberLabel.text = curr.playerNumber
-            cell.img.kf.setImage(with: URL(string: curr.playerImage ))
+            cell.img.kf.setImage(with: URL(string: curr.playerImage ?? "" ))
             cell.nameLabel.text = curr.playerName
-            cell.positionLabel.text = curr.playerType.rawValue
+            cell.positionLabel.text = curr.playerType?.rawValue
             
             cell.contentView.layer.borderWidth=3
             cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
