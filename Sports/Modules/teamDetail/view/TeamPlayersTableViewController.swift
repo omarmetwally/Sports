@@ -8,10 +8,16 @@
 import UIKit
 
 class TeamPlayersTableViewController: UITableViewController {
-
+    var viewModel : TeamViewModel!
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
+    
+        viewModel.fetchData {
+            self.tableView.reloadData()
+            print(self.viewModel.getTeam()?.teamName ?? "NO Player")
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -28,21 +34,54 @@ class TeamPlayersTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 
+        return viewModel.getPlayerCount()+1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        if(indexPath.row==0){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "teamcellid", for: indexPath) as! TeamCell
+            
+            let curr = viewModel.getTeam()
+            
+            cell.nameLabel.text = curr?.teamName
+            cell.img.kf.setImage(with: URL(string: curr?.teamLogo ?? ""))
+            cell.contentView.layer.borderWidth=3
+            cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+            cell.contentView.clipsToBounds = false
+            cell.contentView.layer.cornerRadius = 15
 
+            cell.contentView.backgroundColor = UIColor.white
+            return cell
+        }
+        else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "playercellid", for: indexPath) as! PlayerCell
+            
+            var curr = viewModel.getPlayerAtIndex(i: indexPath.row-1)
+            
+            cell.numberLabel.text = curr.playerNumber
+            cell.img.kf.setImage(with: URL(string: curr.playerImage ))
+            cell.nameLabel.text = curr.playerName
+            cell.positionLabel.text = curr.playerType.rawValue
+            
+            cell.contentView.layer.borderWidth=3
+            cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+            cell.contentView.clipsToBounds = false
+            cell.contentView.layer.cornerRadius = 30
+
+            cell.contentView.backgroundColor = UIColor.white
+            return cell
+        }
         // Configure the cell...
 
-        return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0;
+        if(indexPath.row==0){
+            return 230
+        }
+        return 90
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

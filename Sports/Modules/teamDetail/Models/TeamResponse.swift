@@ -16,11 +16,11 @@ import Foundation
 // MARK: - Team
 struct TeamResponse: Codable {
     let success: Int
-    let result: [TeamResult]
+    let result: [Team]
 }
 
 // MARK: - Result
-struct TeamResult: Codable {
+struct Team: Codable {
     let teamKey: Int
     let teamName: String
     let teamLogo: String
