@@ -7,13 +7,20 @@
 
 import UIKit
 
-class DetailsLeagueCollectionViewController: UICollectionViewController {
+class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
+    @IBOutlet weak var collectionView: UICollectionView!
     var viewModel: DetailsLeagueViewModel!
     private var activityIndicator: UIActivityIndicatorView!
-    
+    var isFav:Bool = false
+    @IBOutlet weak var favBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(viewModel.isStored()){
+            favBtn.setImage(UIImage(named: "star"), for: .normal)
+        }
+        
         activityIndicator = Helper.setupActivityIndicator(in: self.collectionView)
         activityIndicator.startAnimating()
         
@@ -98,11 +105,11 @@ class DetailsLeagueCollectionViewController: UICollectionViewController {
         return section
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return SectionType.allCases.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionType = SectionType(rawValue: section) else { return 0 }
         switch sectionType {
         case .upcomingEvents:
@@ -113,7 +120,7 @@ class DetailsLeagueCollectionViewController: UICollectionViewController {
             return 0
         }
     }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionType = SectionType(rawValue: indexPath.section) else {
             return UICollectionViewCell()
         }
@@ -142,7 +149,7 @@ class DetailsLeagueCollectionViewController: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as? SectionHeaderView else {
             fatalError("Cannot create new header")
         }
@@ -161,4 +168,16 @@ class DetailsLeagueCollectionViewController: UICollectionViewController {
         return headerView
     }
 
+    @IBAction func favBtnAction(_ sender: Any) {
+        print("pressed fav")
+        if isFav{
+            favBtn.setImage(UIImage(named: "favourite"), for: .normal)
+            // delete from favourite here
+            isFav=false
+        }else{
+            favBtn.setImage(UIImage(named: "star"), for: .normal)
+            viewModel.addToFav()
+            isFav=true
+        }
+    }
 }

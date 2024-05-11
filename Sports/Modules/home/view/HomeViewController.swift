@@ -32,10 +32,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sportCollectionCell", for: indexPath) as! SportsCollectionViewCell
         
         cell.sportImage.image = UIImage(named: images[indexPath.row])
-        let screenSize: CGRect = UIScreen.main.bounds
-        cell.sportImage.frame = CGRect(x: 0, y: 0, width: screenSize.width*0.4, height: screenSize.height * 0.4)
-        cell.sportNameLabel.text = images[indexPath.row]
+        cell.sportImage.layer.cornerRadius=15
         
+        
+//        let screenSize: CGRect = UIScreen.main.bounds
+//        cell.sportImage.frame = CGRect(x: 0, y: 0, width: screenSize.width*0.4, height: screenSize.height * 0.4)
+        cell.sportNameLabel.text = images[indexPath.row]
+        cell.sportNameLabel.setContentHuggingPriority(.sceneSizeStayPut, for: .horizontal)
+        cell.sportImage.setContentHuggingPriority(.sceneSizeStayPut, for: .horizontal)
+        
+        
+       
+        cell.contentView.layer.borderWidth=3
+        cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+        cell.contentView.clipsToBounds = true
+        cell.contentView.layer.cornerRadius = 15
+
+        cell.contentView.backgroundColor = UIColor.white
         // Configure the cell
         
         return cell

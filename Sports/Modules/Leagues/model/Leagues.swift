@@ -19,6 +19,17 @@ struct League: Codable {
     let countryName: String
     let leagueLogo: URL?
     let countryLogo: URL?
+    
+    init(_ entity: LeagueCD) {
+        self.leagueKey = Int(entity.leagueKey)
+        self.leagueName = entity.leagueName ?? ""
+        self.leagueLogo = URL(string:entity.leagueLogo ?? "") ?? URL(string: "")
+        countryKey = 1
+        countryName = "placeHolder"
+        self.countryLogo = URL(string: "")
+
+        
+    }
 
     enum CodingKeys: String, CodingKey {
         case leagueKey = "league_key"
