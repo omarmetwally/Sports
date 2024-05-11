@@ -61,6 +61,9 @@ class TableViewController: UITableViewController {
 
         let league = viewModel.leagues[indexPath.row]
         cell.configure(with: league)
+        cell.contentView.layer.borderWidth=2
+        cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
+       
         return cell
     }
     
@@ -68,7 +71,12 @@ class TableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let selectedLeague = viewModel.leagues[indexPath.row]
-        print("Selected League: \(selectedLeague.leagueName)")
+        if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
+            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), leagueId: String(selectedLeague.leagueKey))
+            let navigationController = UINavigationController(rootViewController: detailsVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController, animated: true, completion: nil)
+        }
     }
 
 }
