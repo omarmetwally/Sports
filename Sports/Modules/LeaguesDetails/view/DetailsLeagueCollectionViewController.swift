@@ -19,6 +19,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         
         if(viewModel.isStored()){
             favBtn.setImage(UIImage(named: "star"), for: .normal)
+            isFav=true
         }
         
         activityIndicator = Helper.setupActivityIndicator(in: self.collectionView)
@@ -27,6 +28,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         setupCompositionalLayout()
         fetchEventData()
         fetchLatestResultsData()
+        fetchTeamData()
         collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SectionHeaderView")
         
         
@@ -48,6 +50,13 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             
         }
     }
+    func fetchTeamData(){
+        viewModel.fetchTeams {
+            self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
+            
+        }
+    }
     
     func setupCompositionalLayout() {
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout { (sectionIndex, env) -> NSCollectionLayoutSection? in
@@ -60,7 +69,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             case .latestResults:
                 sectionLayout = self.createLatestResultsSectionLayout()
             case .teams:
-                sectionLayout = self.createDefaultSectionLayout()
+                sectionLayout = self.createTeamsSectionLayout()
             }
             
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
@@ -104,6 +113,19 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
+    func createTeamsSectionLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(150))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+    }
+   
     
      func numberOfSections(in collectionView: UICollectionView) -> Int {
         return SectionType.allCases.count
@@ -117,7 +139,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         case .latestResults:
             return viewModel.latestResults.count
         case .teams:
-            return 0
+            return viewModel.teams.count
         }
     }
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -145,7 +167,21 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
             return cell
         case .teams:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "OtherCellIdentifier", for: indexPath)
+            
+            
+            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as? TeamSmallCell else {
+                fatalError("EventCell not found")
+            }
+            let team = viewModel.teams[indexPath.row]
+            cell.configure(with: team)
+            cell.contentView.layer.cornerRadius = 30
+            cell.contentView.layer.borderWidth = 2
+            cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+            return cell
+            
+            
+            //return collectionView.dequeueReusableCell(withReuseIdentifier: "OtherCellIdentifier", for: indexPath)
         }
     }
     
@@ -166,6 +202,16 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         }
         
         return headerView
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2{
+            print(viewModel.teams[indexPath.row].teamKey ?? 0)
+            let screen = storyboard?.instantiateViewController(withIdentifier: "teamdetails") as! TeamPlayersTableViewController
+            let viewModel = TeamViewModel.init(network: NetworkServices(), sport: viewModel.sportName, id: viewModel.teams[indexPath.row].teamKey ?? 0)
+            screen.viewModel=viewModel
+            
+            navigationController?.pushViewController(screen, animated: true)
+        }
     }
 
     @IBAction func favBtnAction(_ sender: Any) {

@@ -11,10 +11,11 @@ import Foundation
 class DetailsLeagueViewModel {
     var events: [Event] = []
     var latestResults: [Event] = []
+    var teams:[Team] = []
     private let networkService: NetworkProtocol
     private let leagueId: String
     private let league:League
-    private let sportName: Sport
+     let sportName: Sport
     private let coreDataService:CoreDataProtocol
 
     init(networkService: NetworkProtocol,coreDataService : CoreDataProtocol, leagueId: String,sportName:Sport,league:League) {
@@ -61,6 +62,20 @@ class DetailsLeagueViewModel {
                     completion()
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
+                    completion()
+                }
+            }
+        }
+    }
+    func fetchTeams (completion: @escaping () -> Void) {
+        networkService.fetchDataWithLeagueId(sport: sportName,id: Int(leagueId) ?? 0, endpoint: "Teams", decodingType: TeamResponse.self) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let teamResponse):
+                    self?.teams = teamResponse.result
+                    completion()
+                case .failure(let error):
+                    print("Error fetching leagues: \(error.localizedDescription)")
                     completion()
                 }
             }
