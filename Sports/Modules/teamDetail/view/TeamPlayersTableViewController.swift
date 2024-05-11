@@ -45,7 +45,15 @@ class TeamPlayersTableViewController: UITableViewController {
             let curr = viewModel.getTeam()
             
             cell.nameLabel.text = curr?.teamName
-            cell.img.kf.setImage(with: URL(string: curr?.teamLogo ?? ""))
+           cell.img.kf.setImage(with: URL(string: curr?.teamLogo ?? ""),  placeholder: UIImage(named: "badge-placeholder"))
+
+            
+          //  cell.img.image = UIImage(named: "playericon")
+            
+            
+//            if(curr?.teamLogo == ""){
+//                cell.img.image = UIImage(named: "playericon")
+//            }
             cell.contentView.layer.borderWidth=3
             cell.contentView.layer.borderColor = CGColor.init(red: 0, green: 0, blue: 0, alpha: 1)
             cell.contentView.clipsToBounds = false
@@ -58,9 +66,12 @@ class TeamPlayersTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "playercellid", for: indexPath) as! PlayerCell
             
             var curr = viewModel.getPlayerAtIndex(i: indexPath.row-1)
-            
             cell.numberLabel.text = curr.playerNumber
-            cell.img.kf.setImage(with: URL(string: curr.playerImage ?? "" ))
+            if(curr.playerNumber==""){
+                cell.numberLabel.text = " - "
+            }
+           
+            cell.img.kf.setImage(with: URL(string: curr.playerImage ?? "" ),placeholder: UIImage(named: "playericon"))
             cell.nameLabel.text = curr.playerName
             cell.positionLabel.text = curr.playerType?.rawValue
             
