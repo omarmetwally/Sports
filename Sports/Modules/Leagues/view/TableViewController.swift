@@ -12,10 +12,12 @@ class TableViewController: UITableViewController {
     var viewModel: LeaguesDisplayable?
     private var activityIndicator: UIActivityIndicatorView!
     private var emptyBackgroundView: UIView?
+    private var isNetworkAvailable = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Table viewDidLoad")
+        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged(_:)), name: .reachabilityChanged, object: nil)
         self.navigationItem.title="Leagues"
         activityIndicator = Helper.setupActivityIndicator(in: self.tableView)
         setupViewModelForFavorite()
@@ -72,19 +74,20 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedContext = appdelegate.persistentContainer.viewContext
-        
-        let selectedLeague = viewModel!.leagues[indexPath.row]
-        if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
-            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(),coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey),sportName: viewModel!.sport ?? .football,league: selectedLeague)
-            detailsVC.viewModel.delegate = self
-            
-            let navigationController = UINavigationController(rootViewController: detailsVC)
-            navigationController.modalPresentationStyle = .popover
-            self.present(navigationController, animated: true, completion: nil)
+        if self.isNetworkAvailable {
+            navigateToDetails(for: indexPath)
+        } else {
+            Helper.presentNetworkAlert(from: self)
         }
     }
+    
+    @objc func networkStatusChanged(_ notification: Notification) {
+        if let userInfo = notification.userInfo, let isReachable = userInfo["isReachable"] as? Bool {
+            self.isNetworkAvailable = isReachable
+            print("Network status changed: \(isReachable ? "reachable" : "unreachable")")
+        }
+    }
+    
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if viewModel is FavoriteLeaguesViewModel {
@@ -111,28 +114,40 @@ class TableViewController: UITableViewController {
             }
         }
     }
-     func updateTableBackground() {
-            if viewModel?.leagues.isEmpty ?? true {
-                if emptyBackgroundView == nil {
-                    let noDataImage = UIImage(named: "noFavorite")
-                    let imageView = UIImageView(image: noDataImage)
-                    imageView.contentMode = .scaleAspectFit
-                    imageView.translatesAutoresizingMaskIntoConstraints = false
-                    emptyBackgroundView = UIView(frame: tableView.bounds)
-                    emptyBackgroundView?.addSubview(imageView)
-                    
-                    imageView.centerXAnchor.constraint(equalTo: emptyBackgroundView!.centerXAnchor).isActive = true
-                    imageView.centerYAnchor.constraint(equalTo: emptyBackgroundView!.centerYAnchor).isActive = true
-                    imageView.widthAnchor.constraint(equalTo: emptyBackgroundView!.widthAnchor, multiplier: 0.6).isActive = true
-                    imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
-                }
+    func updateTableBackground() {
+        if viewModel?.leagues.isEmpty ?? true {
+            if emptyBackgroundView == nil {
+                let noDataImage = UIImage(named: "noFavorite")
+                let imageView = UIImageView(image: noDataImage)
+                imageView.contentMode = .scaleAspectFit
+                imageView.translatesAutoresizingMaskIntoConstraints = false
+                emptyBackgroundView = UIView(frame: tableView.bounds)
+                emptyBackgroundView?.addSubview(imageView)
                 
-                tableView.backgroundView = emptyBackgroundView
-            } else {
-                tableView.backgroundView = nil
+                imageView.centerXAnchor.constraint(equalTo: emptyBackgroundView!.centerXAnchor).isActive = true
+                imageView.centerYAnchor.constraint(equalTo: emptyBackgroundView!.centerYAnchor).isActive = true
+                imageView.widthAnchor.constraint(equalTo: emptyBackgroundView!.widthAnchor, multiplier: 0.6).isActive = true
+                imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
             }
+            
+            tableView.backgroundView = emptyBackgroundView
+        } else {
+            tableView.backgroundView = nil
         }
-    
+    }
+    private func navigateToDetails(for indexPath: IndexPath) {
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedContext = appdelegate.persistentContainer.viewContext
+        let selectedLeague = viewModel!.leagues[indexPath.row]
+        if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
+            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey), sportName: viewModel!.sport ?? .football, league: selectedLeague)
+            detailsVC.viewModel.delegate = self
+            let navigationController = UINavigationController(rootViewController: detailsVC)
+            navigationController.modalPresentationStyle = .popover
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        
+    }
 }
 
 

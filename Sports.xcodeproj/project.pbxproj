@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070A7A562BF1541400402E3F /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 070A7A552BF1541400402E3F /* Reachability */; };
 		07210B962BEF83C200EC7DBE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07210B952BEF83C200EC7DBE /* Event.swift */; };
 		07210B982BEF83F400EC7DBE /* DetailsLeagueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07210B972BEF83F400EC7DBE /* DetailsLeagueViewModel.swift */; };
 		07210B9A2BEF841E00EC7DBE /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07210B992BEF841E00EC7DBE /* EventCollectionViewCell.swift */; };
@@ -119,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B630172BEEA96C00A2814B /* Kingfisher in Frameworks */,
+				070A7A562BF1541400402E3F /* Reachability in Frameworks */,
 				07B630072BEEA5F400A2814B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +394,7 @@
 			packageProductDependencies = (
 				07B630062BEEA5F400A2814B /* Alamofire */,
 				07B630162BEEA96C00A2814B /* Kingfisher */,
+				070A7A552BF1541400402E3F /* Reachability */,
 			);
 			productName = Sports;
 			productReference = 07B62F772BECC75400A2814B /* Sports.app */;
@@ -468,6 +471,7 @@
 			packageReferences = (
 				07B630052BEEA5F400A2814B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				07B630152BEEA96C00A2814B /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				070A7A542BF1541400402E3F /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 07B62F782BECC75400A2814B /* Products */;
 			projectDirPath = "";
@@ -882,6 +886,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		070A7A542BF1541400402E3F /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.2;
+			};
+		};
 		07B630052BEEA5F400A2814B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -901,6 +913,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		070A7A552BF1541400402E3F /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 070A7A542BF1541400402E3F /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 		07B630062BEEA5F400A2814B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07B630052BEEA5F400A2814B /* XCRemoteSwiftPackageReference "Alamofire" */;

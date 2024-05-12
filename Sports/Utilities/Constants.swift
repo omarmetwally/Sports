@@ -25,10 +25,13 @@ struct Constants {
     struct Alerts {
         static let addFavoriteMessage = "Do you really want to add this league to your favorites?"
         static let removeFavoriteMessage = "Do you really want to remove this league from your favorites?"
-            static let yesButtonTitle = "ADD"
-            static let noButtonTitle = "No"
-            static let deleteButtonTitle = "Delete"
-        }
+        static let yesButtonTitle = "ADD"
+        static let noButtonTitle = "No"
+        static let deleteButtonTitle = "Delete"
+        static let networkErrorMessage = "Network connection required. Please check your connection settings and try again."
+        static let openSettings = "Open Settings"
+        static let cancel = "Cancel"
+    }
 }
 
 enum SectionType: Int, CaseIterable {
