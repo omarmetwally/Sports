@@ -19,6 +19,7 @@ struct League: Codable {
     let countryName: String
     let leagueLogo: URL?
     let countryLogo: URL?
+    var sport: Sport?
     
     init(_ entity: LeagueCD) {
         self.leagueKey = Int(entity.leagueKey)
@@ -27,6 +28,7 @@ struct League: Codable {
         countryKey = 1
         countryName = "placeHolder"
         self.countryLogo = URL(string: "")
+        self.sport = Sport(rawValue: entity.sport ?? "")
 
         
     }
@@ -39,6 +41,32 @@ struct League: Codable {
         case leagueLogo = "league_logo"
         case countryLogo = "country_logo"
     }
+    
+    
+    
+    
+    
+    init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            leagueKey = try container.decode(Int.self, forKey: .leagueKey)
+            leagueName = try container.decode(String.self, forKey: .leagueName)
+            countryKey = try container.decode(Int.self, forKey: .countryKey)
+            countryName = try container.decode(String.self, forKey: .countryName)
+
+            if let leagueLogoString = try container.decodeIfPresent(String.self, forKey: .leagueLogo) {
+                leagueLogo = URL(string: leagueLogoString)
+            } else {
+                leagueLogo = nil
+            }
+
+            if let countryLogoString = try container.decodeIfPresent(String.self, forKey: .countryLogo) {
+                countryLogo = URL(string: countryLogoString)
+            } else {
+                countryLogo = nil
+            }
+        }
+    
+    
 }
 
 

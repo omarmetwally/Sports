@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 protocol CoreDataProtocol {
-    func addLeague(league:League)
+    func addLeague(league:League,sport:Sport)
     func isLeagueSaved(leagueId:Int)->Bool
     func deleteLeague(league:League)
-    func retriveAllLeagues()
+    func retriveAllLeagues() -> [League]
     func deleteAllLeagues()
     
 }
@@ -48,7 +48,7 @@ class CoreDataServices:CoreDataProtocol{
         //delete all because (primary key البيه معندوش)
     }
     
-    func addLeague(league: League) {
+    func addLeague(league: League,sport:Sport) {
 
         let entity = NSEntityDescription.entity(forEntityName: "LeagueCD", in: managedContext)!
         let leagueObj = NSManagedObject(entity: entity, insertInto: managedContext)
@@ -56,6 +56,9 @@ class CoreDataServices:CoreDataProtocol{
         leagueObj.setValue(league.leagueKey, forKey: "leagueKey")
         leagueObj.setValue(league.leagueName, forKey: "leagueName")
         leagueObj.setValue(league.leagueLogo?.absoluteString, forKey: "leagueLogo")
+        leagueObj.setValue(sport.rawValue, forKey: "sport")
+
+        
        
         do{
             try managedContext.save()
@@ -67,12 +70,33 @@ class CoreDataServices:CoreDataProtocol{
     }
     
     func deleteLeague(league: League) {
-        //add delete
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "LeagueCD")
+        fetchRequest.predicate = NSPredicate(format: "leagueKey == %d", league.leagueKey)
+        
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+
+        do {
+            try managedContext.execute(deleteRequest)
+            try managedContext.save()
+            print("Deleted successfully")
+        } catch let error as NSError {
+            print("Could not delete. \(error), \(error.userInfo)")
+        }
     }
+
     
-    func retriveAllLeagues() {
-        //add retrive
+    func retriveAllLeagues() -> [League] {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "LeagueCD")
+        do {
+            let results = try managedContext.fetch(fetchRequest) as! [LeagueCD]
+            return results.map { League($0) }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return []
+        }
     }
+
+
     
     
 }

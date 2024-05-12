@@ -7,44 +7,28 @@
 
 import UIKit
 
-class TabBarViewController: UITabBarController,UITabBarControllerDelegate {
+import UIKit
 
+class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate=self
-//        if #available(iOS 16.0, *) {
-//            favButton.isHidden=true
-//        } else {
-//            // Fallback on earlier versions
-//        }
-        // Do any additional setup after loading the view.
+        self.delegate = self
     }
+
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return true
+    }
+
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController.isKind(of: DetailsLeagueCollectionViewController.classForCoder()){
-//            if #available(iOS 16.0, *) {
-//                favButton.isHidden=false
-//            } else {
-//                // Fallback on earlier versions
-//            }
-//        }else{
-//            if #available(iOS 16.0, *) {
-//                favButton.isHidden=true
-//            } else {
-//                // Fallback on earlier versions
-//            }
+        if viewController.tabBarItem.tag == 1, let navController = viewController as? UINavigationController {
+            if let tableViewController = navController.viewControllers.first as? TableViewController {
+                tableViewController.viewModel?.fetchData {
+                    DispatchQueue.main.async {
+                        tableViewController.tableView.reloadData()
+                    }
+                }
+            }
         }
-        
     }
-
-  
-    /*d
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-  
 }

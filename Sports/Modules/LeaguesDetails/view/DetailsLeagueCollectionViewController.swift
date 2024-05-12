@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
-    var viewModel: DetailsLeagueViewModel!
+    var viewModel: DetailLeagueViewModelProtocol!
     private var activityIndicator: UIActivityIndicatorView!
     var isFav:Bool = false
     @IBOutlet weak var favBtn: UIButton!
@@ -234,7 +234,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         print("pressed fav")
         if isFav{
             favBtn.setImage(UIImage(named: "favourite"), for: .normal)
-            // delete from favourite here
+            viewModel.deleteFromFav()
             isFav=false
         }else{
             favBtn.setImage(UIImage(named: "star"), for: .normal)
