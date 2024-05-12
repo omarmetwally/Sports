@@ -233,13 +233,19 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
     @IBAction func favBtnAction(_ sender: Any) {
         print("pressed fav")
         if isFav{
-            favBtn.setImage(UIImage(named: "favourite"), for: .normal)
-            viewModel.deleteFromFav()
-            isFav=false
+            Helper.presentRemoveFromFavoritesAlert(from: self) { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.favBtn.setImage(UIImage(named: "favourite"), for: .normal)
+                strongSelf.viewModel.deleteFromFav()
+                strongSelf.isFav = false
+            }
         }else{
-            favBtn.setImage(UIImage(named: "star"), for: .normal)
-            viewModel.addToFav()
-            isFav=true
+            Helper.presentAddToFavoritesAlert(from: self) { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.favBtn.setImage(UIImage(named: "star"), for: .normal)
+                strongSelf.viewModel.addToFav()
+                strongSelf.isFav = true
+            }
         }
     }
 }

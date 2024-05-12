@@ -26,6 +26,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
                 tableViewController.viewModel?.fetchData {
                     DispatchQueue.main.async {
                         tableViewController.tableView.reloadData()
+                        tableViewController.updateTableBackground()
                     }
                 }
             }

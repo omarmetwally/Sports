@@ -11,6 +11,7 @@ class TableViewController: UITableViewController {
     
     var viewModel: LeaguesDisplayable?
     private var activityIndicator: UIActivityIndicatorView!
+    private var emptyBackgroundView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class TableViewController: UITableViewController {
         activityIndicator.startAnimating()
         viewModel.fetchData {
             self.tableView.reloadData()
+            self.updateTableBackground()
             self.activityIndicator.stopAnimating()
             
         }
@@ -96,17 +98,40 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             if let favViewModel = viewModel as? FavoriteLeaguesViewModel {
                 let league = favViewModel.leagues[indexPath.row]
-                favViewModel.delete(league: league) {
-                    favViewModel.fetchData {
-                        DispatchQueue.main.async {
-                            tableView.deleteRows(at: [indexPath], with: .fade)
+                Helper.presentRemoveFromFavoritesAlert(from: self) {
+                    favViewModel.delete(league: league) {
+                        favViewModel.fetchData {
+                            DispatchQueue.main.async {
+                                tableView.deleteRows(at: [indexPath], with: .fade)
+                                self.updateTableBackground()
+                            }
                         }
                     }
                 }
             }
         }
     }
-
+     func updateTableBackground() {
+            if viewModel?.leagues.isEmpty ?? true {
+                if emptyBackgroundView == nil {
+                    let noDataImage = UIImage(named: "noFavorite")
+                    let imageView = UIImageView(image: noDataImage)
+                    imageView.contentMode = .scaleAspectFit
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    emptyBackgroundView = UIView(frame: tableView.bounds)
+                    emptyBackgroundView?.addSubview(imageView)
+                    
+                    imageView.centerXAnchor.constraint(equalTo: emptyBackgroundView!.centerXAnchor).isActive = true
+                    imageView.centerYAnchor.constraint(equalTo: emptyBackgroundView!.centerYAnchor).isActive = true
+                    imageView.widthAnchor.constraint(equalTo: emptyBackgroundView!.widthAnchor, multiplier: 0.6).isActive = true
+                    imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+                }
+                
+                tableView.backgroundView = emptyBackgroundView
+            } else {
+                tableView.backgroundView = nil
+            }
+        }
     
 }
 
@@ -117,6 +142,7 @@ extension TableViewController: FavoriteUpdateDelegate {
         activityIndicator.startAnimating()
         viewModel?.fetchData {
             self.tableView.reloadData()
+            self.updateTableBackground()
             self.activityIndicator.stopAnimating()
         }
     }
