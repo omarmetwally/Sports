@@ -40,4 +40,9 @@ class FavoriteLeaguesViewModel: LeaguesDisplayable {
         }
         completion()
     }
+    func delete(league: League, completion: @escaping () -> Void) {
+        coreDataService.deleteLeague(league: league)
+        completion()
+    }
+
 }

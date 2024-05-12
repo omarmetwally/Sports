@@ -84,6 +84,30 @@ class TableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if viewModel is FavoriteLeaguesViewModel {
+            return .delete
+        } else {
+            return .none
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let favViewModel = viewModel as? FavoriteLeaguesViewModel {
+                let league = favViewModel.leagues[indexPath.row]
+                favViewModel.delete(league: league) {
+                    favViewModel.fetchData {
+                        DispatchQueue.main.async {
+                            tableView.deleteRows(at: [indexPath], with: .fade)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
 }
 
 
