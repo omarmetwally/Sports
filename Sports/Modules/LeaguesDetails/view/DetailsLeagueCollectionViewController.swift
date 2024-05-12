@@ -9,10 +9,12 @@ import UIKit
 
 class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
-    var viewModel: DetailsLeagueViewModel!
+    var viewModel: DetailLeagueViewModelProtocol!
     private var activityIndicator: UIActivityIndicatorView!
     var isFav:Bool = false
     @IBOutlet weak var favBtn: UIButton!
+    let fetchGroup = DispatchGroup()
+    var headersShouldAppear: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,20 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         activityIndicator.startAnimating()
         
         setupCompositionalLayout()
+        fetchGroup.enter()
         fetchEventData()
+        
+        fetchGroup.enter()
         fetchLatestResultsData()
+        
+        fetchGroup.enter()
         fetchTeamData()
+        
+        fetchGroup.notify(queue: .main) {
+            self.headersShouldAppear = true
+            self.collectionView.reloadData()
+            self.activityIndicator.stopAnimating()
+        }
         collectionView.register(SectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "SectionHeaderView")
         
         
@@ -36,24 +49,20 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
     
     func fetchEventData() {
         viewModel.fetchEvents {
-            self.collectionView.reloadData()
-            self.activityIndicator.stopAnimating()
+            self.fetchGroup.leave()
             
         }
     }
     
     func fetchLatestResultsData() {
-        activityIndicator.startAnimating()
         viewModel.fetchLatestResults {
-            self.collectionView.reloadData()
-            self.activityIndicator.stopAnimating()
+            self.fetchGroup.leave()
             
         }
     }
     func fetchTeamData(){
         viewModel.fetchTeams {
-            self.collectionView.reloadData()
-            self.activityIndicator.stopAnimating()
+            self.fetchGroup.leave()
             
         }
     }
@@ -79,7 +88,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             return sectionLayout
         }
     }
-
+    
     
     func createDefaultSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -89,7 +98,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         let section = NSCollectionLayoutSection(group: group)
         return section
     }
-
+    
     func createEventsSectionLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -125,13 +134,13 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         section.orthogonalScrollingBehavior = .continuous
         return section
     }
-   
     
-     func numberOfSections(in collectionView: UICollectionView) -> Int {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return SectionType.allCases.count
     }
     
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let sectionType = SectionType(rawValue: section) else { return 0 }
         switch sectionType {
         case .upcomingEvents:
@@ -142,7 +151,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             return viewModel.teams.count
         }
     }
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let sectionType = SectionType(rawValue: indexPath.section) else {
             return UICollectionViewCell()
         }
@@ -185,21 +194,28 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         }
     }
     
-     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeaderView", for: indexPath) as? SectionHeaderView else {
             fatalError("Cannot create new header")
         }
         
-        if let sectionType = SectionType(rawValue: indexPath.section) {
-            switch sectionType {
-            case .upcomingEvents:
-                headerView.configure(with: "Upcoming Events")
-            case .latestResults:
-                headerView.configure(with: "Latest Results")
-            case .teams:
-                headerView.configure(with: "Teams")
+        
+        if headersShouldAppear {
+            
+            if let sectionType = SectionType(rawValue: indexPath.section) {
+                switch sectionType {
+                case .upcomingEvents:
+                    headerView.configure(with: "Upcoming Events")
+                case .latestResults:
+                    headerView.configure(with: "Latest Results")
+                case .teams:
+                    headerView.configure(with: "Teams")
+                }
             }
+        }else{
+            headerView.configure(with: "")
         }
+        
         
         return headerView
     }
@@ -213,17 +229,23 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             navigationController?.pushViewController(screen, animated: true)
         }
     }
-
+    
     @IBAction func favBtnAction(_ sender: Any) {
         print("pressed fav")
         if isFav{
-            favBtn.setImage(UIImage(named: "favourite"), for: .normal)
-            // delete from favourite here
-            isFav=false
+            Helper.presentRemoveFromFavoritesAlert(from: self) { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.favBtn.setImage(UIImage(named: "favourite"), for: .normal)
+                strongSelf.viewModel.deleteFromFav()
+                strongSelf.isFav = false
+            }
         }else{
-            favBtn.setImage(UIImage(named: "star"), for: .normal)
-            viewModel.addToFav()
-            isFav=true
+            Helper.presentAddToFavoritesAlert(from: self) { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.favBtn.setImage(UIImage(named: "star"), for: .normal)
+                strongSelf.viewModel.addToFav()
+                strongSelf.isFav = true
+            }
         }
     }
 }

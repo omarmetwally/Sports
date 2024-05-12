@@ -7,10 +7,10 @@
 
 import Foundation
 
-class LeaguesViewModel {
+class LeaguesViewModel:LeaguesDisplayable  {
     private var networkService: NetworkProtocol
     var leagues: [League] = []
-    var sport: Sport
+    var sport: Sport?
 
     init(networkService: NetworkProtocol, sport: Sport) {
         self.networkService = networkService
@@ -18,7 +18,8 @@ class LeaguesViewModel {
     }
 
     func fetchData(completion: @escaping () -> Void) {
-        networkService.fetchData(sport: sport, endpoint: "Leagues", decodingType: LeagueResponse.self) { [weak self] result in
+        print("Leagues fetchData")
+        networkService.fetchData(sport: sport ?? .football, endpoint: "Leagues", decodingType: LeagueResponse.self) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let leagueResponse):

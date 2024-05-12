@@ -22,6 +22,13 @@ struct Constants {
     static func baseURL(for sport: Sport) -> String {
         return "https://apiv2.allsportsapi.com/\(sport.rawValue)/"
     }
+    struct Alerts {
+        static let addFavoriteMessage = "Do you really want to add this league to your favorites?"
+        static let removeFavoriteMessage = "Do you really want to remove this league from your favorites?"
+            static let yesButtonTitle = "ADD"
+            static let noButtonTitle = "No"
+            static let deleteButtonTitle = "Delete"
+        }
 }
 
 enum SectionType: Int, CaseIterable {

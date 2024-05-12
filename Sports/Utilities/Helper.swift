@@ -19,4 +19,24 @@ class Helper {
         ])
         return activityIndicator
     }
+    
+    static func presentAddToFavoritesAlert(from viewController: UIViewController, yesAction: @escaping () -> Void) {
+            let alert = UIAlertController(title: nil, message: Constants.Alerts.addFavoriteMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constants.Alerts.yesButtonTitle, style: .default, handler: { _ in
+                yesAction()
+            }))
+            alert.addAction(UIAlertAction(title: Constants.Alerts.noButtonTitle, style: .cancel, handler: nil))
+            
+            viewController.present(alert, animated: true)
+        }
+        
+        static func presentRemoveFromFavoritesAlert(from viewController: UIViewController, yesAction: @escaping () -> Void) {
+            let alert = UIAlertController(title: nil, message: Constants.Alerts.removeFavoriteMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: Constants.Alerts.deleteButtonTitle, style: .destructive, handler: { _ in
+                yesAction()
+            }))
+            alert.addAction(UIAlertAction(title: Constants.Alerts.noButtonTitle, style: .cancel, handler: nil))
+            
+            viewController.present(alert, animated: true)
+        }
 }
