@@ -54,16 +54,20 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sports: [Sport] = [.football, .basketball, .tennis, .cricket]
-        let selectedSport = sports[indexPath.row]
-        
-        let networkService = NetworkServices()
-        
-        let viewModel = LeaguesViewModel(networkService: networkService,sport: selectedSport)
-        if let leagueListScreen = storyboard?.instantiateViewController(withIdentifier: "TableViewController") as? TableViewController {
-            leagueListScreen.viewModel = viewModel
-            navigationController?.pushViewController(leagueListScreen, animated: true)
+        if Helper.isConnectedToNetwork(){
+            let sports: [Sport] = [.football, .basketball, .tennis, .cricket]
+            let selectedSport = sports[indexPath.row]
+            
+            let networkService = NetworkServices()
+            
+            let viewModel = LeaguesViewModel(networkService: networkService,sport: selectedSport)
+            if let leagueListScreen = storyboard?.instantiateViewController(withIdentifier: "TableViewController") as? TableViewController {
+                leagueListScreen.viewModel = viewModel
+                navigationController?.pushViewController(leagueListScreen, animated: true)
+            }        } else {
+            Helper.presentNetworkAlert(from: self)
         }
+        
     }
     
     @IBOutlet weak var connectionErrorImage: UIImageView!

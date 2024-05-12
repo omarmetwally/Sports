@@ -6,13 +6,13 @@
 //
 
 import UIKit
-
+import Reachability
 class Helper {
     static func setupActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
-
+        
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -49,5 +49,15 @@ class Helper {
         }))
         alert.addAction(UIAlertAction(title: Constants.Alerts.cancel, style: .cancel, handler: nil))
         viewController.present(alert, animated: true, completion: nil)
+    }
+    static func isConnectedToNetwork() -> Bool {
+        guard let reachability = try? Reachability() else { return false }
+        
+        switch reachability.connection {
+        case .wifi, .cellular:
+            return true
+        case .unavailable, .none:
+            return false
+        }
     }
 }
