@@ -17,7 +17,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Table viewDidLoad")
-        NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged(_:)), name: .reachabilityChanged, object: nil)
         self.navigationItem.title="Leagues"
         activityIndicator = Helper.setupActivityIndicator(in: self.tableView)
         setupViewModelForFavorite()
@@ -74,17 +73,10 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if self.isNetworkAvailable {
+        if Helper.isConnectedToNetwork(){
             navigateToDetails(for: indexPath)
         } else {
             Helper.presentNetworkAlert(from: self)
-        }
-    }
-    
-    @objc func networkStatusChanged(_ notification: Notification) {
-        if let userInfo = notification.userInfo, let isReachable = userInfo["isReachable"] as? Bool {
-            self.isNetworkAvailable = isReachable
-            print("Network status changed: \(isReachable ? "reachable" : "unreachable")")
         }
     }
     
