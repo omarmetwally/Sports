@@ -46,7 +46,7 @@ class DetailsLeagueViewModel: DetailLeagueViewModelProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let startDate = dateFormatter.string(from: Date())
-        let endDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 15, to: Date())!)
+        let endDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 10, to: Date())!)
         
         let endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
         networkService.fetchData(sport: sportName, endpoint: endpoint, decodingType: EventsResponse.self) { [weak self] result in
@@ -66,8 +66,9 @@ class DetailsLeagueViewModel: DetailLeagueViewModelProtocol {
     func fetchLatestResults(completion: @escaping () -> Void) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let endDate = dateFormatter.string(from: Date())
-        let startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -5, to: Date())!)
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        let endDate = dateFormatter.string(from: yesterday)
+        let startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -2, to: Date())!)
         
         let endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
         networkService.fetchData(sport: sportName, endpoint: endpoint, decodingType: EventsResponse.self) { [weak self] result in

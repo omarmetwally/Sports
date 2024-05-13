@@ -109,6 +109,17 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
+        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            items.forEach { item in
+                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                let minScale: CGFloat = 0.7
+                let maxScale: CGFloat = 1.0
+                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width * 0.5), minScale)
+                let alpha = scale
+                item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                item.alpha = alpha
+            }
+        }
         return section
     }
     func createLatestResultsSectionLayout() -> NSCollectionLayoutSection {
@@ -120,6 +131,15 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.visibleItemsInvalidationHandler = { (visibleItems, point, environment) in
+            visibleItems.forEach { item in
+                let distanceFromCenter = abs((item.frame.midY - point.y) - environment.container.contentSize.height / 2)
+                let normalizedDistance = min(distanceFromCenter / (environment.container.contentSize.height / 2), 1)
+                
+                let scale = 1 - (0.2 * normalizedDistance)
+                item.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
+        }
         return section
     }
     func createTeamsSectionLayout() -> NSCollectionLayoutSection {
