@@ -26,11 +26,10 @@ class EventCollectionViewCell: UICollectionViewCell {
         
         awayTeamNameLabel.text = event.awayTeam
         homeTeamNameLabel.text=event.homeTeam
-        eventDateLabel.text = event.eventDate
+        eventDateLabel.text = Helper.formattedDate(from: event.eventDate)
         eventTimeLabel.text = event.eventTime
         scoreLabel.text=event.finalResult
-//        homeTeamLogoImageView.kf.setImage(with: event.homeTeamLogo)
-//        awayTeamLogoImageView.kf.setImage(with: event.awayTeamLogo)
+
         
         homeTeamLogoImageView.kf.indicatorType = .activity
         homeTeamLogoImageView.kf.setImage(

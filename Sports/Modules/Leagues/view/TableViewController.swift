@@ -88,7 +88,18 @@ class TableViewController: UITableViewController {
             return .none
         }
     }
-
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let initialTransform = CGAffineTransform(translationX: -100, y: 0)
+        cell.transform = initialTransform
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
+            cell.transform = CGAffineTransform.identity
+            cell.alpha = 1
+        })
+    }
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if let favViewModel = viewModel as? FavoriteLeaguesViewModel {

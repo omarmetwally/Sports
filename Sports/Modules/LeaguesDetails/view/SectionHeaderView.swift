@@ -24,10 +24,10 @@ class SectionHeaderView: UICollectionReusableView {
     private func configureLayout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFont(ofSize: 19)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .left
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             titleLabel.topAnchor.constraint(equalTo: topAnchor,constant: 30),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
