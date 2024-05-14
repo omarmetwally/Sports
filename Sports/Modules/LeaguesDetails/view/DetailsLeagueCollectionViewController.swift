@@ -18,7 +18,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.register(PlaceholderCollectionViewCell.self, forCellWithReuseIdentifier: "PlaceholderCell")
         if(viewModel.isStored()){
             favBtn.setImage(UIImage(named: "star"), for: .normal)
             isFav=true
@@ -164,11 +164,11 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         guard let sectionType = SectionType(rawValue: section) else { return 0 }
         switch sectionType {
         case .upcomingEvents:
-            return viewModel.events.count
+            return max(1, viewModel.events.count)
         case .latestResults:
-            return viewModel.latestResults.count
+            return max (1,viewModel.latestResults.count)
         case .teams:
-            return viewModel.teams.count
+            return max (1,viewModel.teams.count)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -177,6 +177,10 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         }
         switch sectionType {
         case .upcomingEvents:
+            if viewModel.events.isEmpty {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath) as! PlaceholderCollectionViewCell
+                return cell
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventCollectionViewCell else {
                 fatalError("EventCell not found")
             }
@@ -187,6 +191,10 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             cell.scoreLabel.isHidden=true
             return cell
         case .latestResults:
+            if viewModel.latestResults.isEmpty {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath) as! PlaceholderCollectionViewCell
+                return cell
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventCollectionViewCell else {
                 fatalError("EventCell not found")
             }
@@ -196,7 +204,10 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
             return cell
         case .teams:
-            
+            if viewModel.teams.isEmpty {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath) as! PlaceholderCollectionViewCell
+                return cell
+            }
             
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as? TeamSmallCell else {
