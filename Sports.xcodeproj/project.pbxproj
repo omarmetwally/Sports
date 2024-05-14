@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0704BDDF2BF37E3D006AE117 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDDE2BF37E3D006AE117 /* MockNetworkService.swift */; };
+		0704BDE12BF37F56006AE117 /* NetworkServiceMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDE02BF37F56006AE117 /* NetworkServiceMockTests.swift */; };
+		0704BDE52BF38757006AE117 /* NetworkServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDE42BF38757006AE117 /* NetworkServicesTests.swift */; };
 		070A7A562BF1541400402E3F /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 070A7A552BF1541400402E3F /* Reachability */; };
 		07210B962BEF83C200EC7DBE /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07210B952BEF83C200EC7DBE /* Event.swift */; };
 		07210B982BEF83F400EC7DBE /* DetailsLeagueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07210B972BEF83F400EC7DBE /* DetailsLeagueViewModel.swift */; };
@@ -22,7 +25,6 @@
 		07B62F852BECC75400A2814B /* Sports.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 07B62F832BECC75400A2814B /* Sports.xcdatamodeld */; };
 		07B62F872BECC75B00A2814B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07B62F862BECC75B00A2814B /* Assets.xcassets */; };
 		07B62F8A2BECC75B00A2814B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07B62F882BECC75B00A2814B /* LaunchScreen.storyboard */; };
-		07B62F952BECC75B00A2814B /* SportsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B62F942BECC75B00A2814B /* SportsTests.swift */; };
 		07B62F9F2BECC75B00A2814B /* SportsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B62F9E2BECC75B00A2814B /* SportsUITests.swift */; };
 		07B62FA12BECC75B00A2814B /* SportsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B62FA02BECC75B00A2814B /* SportsUITestsLaunchTests.swift */; };
 		07B630042BEEA5A700A2814B /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B630032BEEA5A700A2814B /* NetworkServices.swift */; };
@@ -69,6 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0704BDDE2BF37E3D006AE117 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
+		0704BDE02BF37F56006AE117 /* NetworkServiceMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMockTests.swift; sourceTree = "<group>"; };
+		0704BDE42BF38757006AE117 /* NetworkServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesTests.swift; sourceTree = "<group>"; };
 		07210B952BEF83C200EC7DBE /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		07210B972BEF83F400EC7DBE /* DetailsLeagueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsLeagueViewModel.swift; sourceTree = "<group>"; };
 		07210B992BEF841E00EC7DBE /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -86,7 +91,6 @@
 		07B62F892BECC75B00A2814B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07B62F8B2BECC75B00A2814B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07B62F902BECC75B00A2814B /* SportsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		07B62F942BECC75B00A2814B /* SportsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTests.swift; sourceTree = "<group>"; };
 		07B62F9A2BECC75B00A2814B /* SportsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SportsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07B62F9E2BECC75B00A2814B /* SportsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsUITests.swift; sourceTree = "<group>"; };
 		07B62FA02BECC75B00A2814B /* SportsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -142,6 +146,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0704BDDD2BF37DE5006AE117 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0704BDDE2BF37E3D006AE117 /* MockNetworkService.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0704BDE22BF386A8006AE117 /* TestingWithMocking */ = {
+			isa = PBXGroup;
+			children = (
+				0704BDDD2BF37DE5006AE117 /* Mocks */,
+				0704BDE02BF37F56006AE117 /* NetworkServiceMockTests.swift */,
+			);
+			path = TestingWithMocking;
+			sourceTree = "<group>";
+		};
+		0704BDE32BF386C1006AE117 /* TestingWithExpectation */ = {
+			isa = PBXGroup;
+			children = (
+				0704BDE42BF38757006AE117 /* NetworkServicesTests.swift */,
+			);
+			path = TestingWithExpectation;
+			sourceTree = "<group>";
+		};
 		07210B902BEF835900EC7DBE /* LeaguesDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +275,8 @@
 		07B62F932BECC75B00A2814B /* SportsTests */ = {
 			isa = PBXGroup;
 			children = (
-				07B62F942BECC75B00A2814B /* SportsTests.swift */,
+				0704BDE32BF386C1006AE117 /* TestingWithExpectation */,
+				0704BDE22BF386A8006AE117 /* TestingWithMocking */,
 			);
 			path = SportsTests;
 			sourceTree = "<group>";
@@ -556,7 +586,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07B62F952BECC75B00A2814B /* SportsTests.swift in Sources */,
+				0704BDE52BF38757006AE117 /* NetworkServicesTests.swift in Sources */,
+				0704BDE12BF37F56006AE117 /* NetworkServiceMockTests.swift in Sources */,
+				0704BDDF2BF37E3D006AE117 /* MockNetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

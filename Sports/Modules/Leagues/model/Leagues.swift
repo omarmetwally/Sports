@@ -79,3 +79,15 @@ extension League {
     }
 }
 
+extension League {
+    //extension for testing
+    init(leagueKey: Int, leagueName: String, countryKey: Int, countryName: String, leagueLogo: URL?, countryLogo: URL?, sport: Sport?) {
+        self.leagueKey = leagueKey
+        self.leagueName = leagueName
+        self.countryKey = countryKey
+        self.countryName = countryName
+        self.leagueLogo = leagueLogo
+        self.countryLogo = countryLogo
+        self.sport = sport
+    }
+}
