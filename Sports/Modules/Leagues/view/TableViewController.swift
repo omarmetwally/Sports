@@ -120,7 +120,7 @@ class TableViewController: UITableViewController {
     func updateTableBackground() {
         if viewModel?.leagues.isEmpty ?? true {
             if emptyBackgroundView == nil {
-                let noDataImage = UIImage(named: "noFavorite")
+                let noDataImage = UIImage(named: "noFavoritess")
                 let imageView = UIImageView(image: noDataImage)
                 imageView.contentMode = .scaleAspectFit
                 imageView.translatesAutoresizingMaskIntoConstraints = false

@@ -15,8 +15,8 @@ struct LeagueResponse: Codable {
 struct League: Codable {
     let leagueKey: Int
     let leagueName: String
-    let countryKey: Int
-    let countryName: String
+    let countryKey: Int?
+    let countryName: String?
     let leagueLogo: URL?
     let countryLogo: URL?
     var sport: Sport?
@@ -50,9 +50,8 @@ struct League: Codable {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             leagueKey = try container.decode(Int.self, forKey: .leagueKey)
             leagueName = try container.decode(String.self, forKey: .leagueName)
-            countryKey = try container.decode(Int.self, forKey: .countryKey)
-            countryName = try container.decode(String.self, forKey: .countryName)
-
+            countryKey = try container.decodeIfPresent(Int.self, forKey: .countryKey)
+            countryName = try container.decodeIfPresent(String.self, forKey: .countryName)
             if let leagueLogoString = try container.decodeIfPresent(String.self, forKey: .leagueLogo) {
                 leagueLogo = URL(string: leagueLogoString)
             } else {
