@@ -33,11 +33,28 @@ class MockNetworkService: NetworkProtocol {
     // MARK:  - Ghoneim code
     
     func fetchDataWithId<T: Decodable>(sport: Sport, id: Int, endpoint: String, decodingType: T.Type, completionHandler: @escaping (Result<T, Error>) -> Void) {
-        //Ghoneim code
+        if shouldReturnError {
+            completionHandler(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+        } else {
+            if let data = mockedData as? T {
+                completionHandler(.success(data))
+            } else {
+                completionHandler(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+            }
+        }
     }
     
     func fetchDataWithLeagueId<T: Decodable>(sport: Sport, id: Int, endpoint: String, decodingType: T.Type, completionHandler: @escaping (Result<T, Error>) -> Void) {
-        //Ghoneim code
+        if shouldReturnError {
+            completionHandler(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+        } else {
+            if let data = mockedData as? T {
+                completionHandler(.success(data))
+            } else {
+                completionHandler(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+            }
+        }
     }
+    
 }
 
