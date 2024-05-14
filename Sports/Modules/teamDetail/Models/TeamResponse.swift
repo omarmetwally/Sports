@@ -17,6 +17,10 @@ import Foundation
 struct TeamResponse: Codable {
     let success: Int
     let result: [Team]
+    init(success: Int, result: [Team]) {
+        self.success = success
+        self.result = result
+    }
 }
 
 // MARK: - Result
@@ -26,6 +30,14 @@ struct Team: Codable {
     let teamLogo: String?
     let players: [Player]?
     let coaches: [Coach]?
+    
+    init(teamKey: Int?, teamName: String?, teamLogo: String?, players: [Player]?, coaches: [Coach]?) {
+        self.teamKey = teamKey
+        self.teamName = teamName
+        self.teamLogo = teamLogo
+        self.players = players
+        self.coaches = coaches
+    }
 
     enum CodingKeys: String, CodingKey {
         case teamKey = "team_key"

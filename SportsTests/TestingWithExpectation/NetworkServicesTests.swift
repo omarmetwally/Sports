@@ -52,6 +52,69 @@ class NetworkServicesTests: XCTestCase {
 
         waitForExpectations(timeout: 5.0, handler: nil)
     }
+    func testFetchDataWithIDSucess(){
+        let expectation = expectation(description: "waiting for team data")
+        
+        networkService.fetchDataWithId(sport: Sport.football ,id: 97, endpoint: "Teams", decodingType: TeamResponse.self) { result in
+                switch result {
+                case .success(let teamResponse):
+                    XCTAssertEqual(teamResponse.result.count, 1, "team details failed")
+                    expectation.fulfill()
+                case .failure(let error):
+                    print("Error fetching teams: \(error.localizedDescription)")
+                    expectation.fulfill()
+                }
+            }
+        
+        waitForExpectations(timeout: 10)
+    }
+    func testFetchDataWithIDFaliure(){
+        let expectation = expectation(description: "waiting for team data")
+        
+        networkService.fetchDataWithId(sport: Sport.football ,id: -3, endpoint: "Teams", decodingType: TeamResponse.self) { result in
+                switch result {
+                case .success(_):
+                    XCTFail("Expected failure but got success.")
+                case .failure(let error):
+                    XCTAssertNotNil(error, "Error should not be nil")
+                    expectation.fulfill()
+                }
+            }
+        
+        waitForExpectations(timeout: 10)
+    }
+    func testFetchDataWithLeagueIDSucess(){
+        let expectation = expectation(description: "waiting for team data")
+        
+        networkService.fetchDataWithLeagueId(sport: Sport.football ,id: 10, endpoint: "Teams", decodingType: TeamResponse.self) { result in
+                switch result {
+                case .success(let teamResponse):
+                    XCTAssertGreaterThan(teamResponse.result.count, 0, "Should have at least one Team")
+                    expectation.fulfill()
+                case .failure(let error):
+                    print("Error fetching teams: \(error.localizedDescription)")
+                    expectation.fulfill()
+                }
+            }
+        
+        waitForExpectations(timeout: 10)
+    }
+    func testFetchDataWithLeagueIDFaliure(){
+        let expectation = expectation(description: "waiting for team data")
+        
+        networkService.fetchDataWithLeagueId(sport: Sport.football ,id: -3, endpoint: "Teams", decodingType: TeamResponse.self) { result in
+                switch result {
+                case .success(_):
+                    XCTFail("Expected failure but got success.")
+                case .failure(let error):
+                    XCTAssertNotNil(error, "Error should not be nil")
+                    expectation.fulfill()
+                }
+            }
+        
+        waitForExpectations(timeout: 10)
+    }
+
 
     
     
