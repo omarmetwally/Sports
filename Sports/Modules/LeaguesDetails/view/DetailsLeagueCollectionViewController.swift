@@ -28,6 +28,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         activityIndicator.startAnimating()
         
         setupCompositionalLayout()
+        self.headersShouldAppear = true
         fetchGroup.enter()
         fetchEventData()
         
@@ -38,7 +39,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         fetchTeamData()
         
         fetchGroup.notify(queue: .main) {
-            self.headersShouldAppear = true
+            
             self.collectionView.reloadData()
             self.activityIndicator.stopAnimating()
         }
