@@ -19,7 +19,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
-        let heightPerItem = widthPerItem * 1.25 
+        let heightPerItem = 200.0
         return CGSize(width: widthPerItem, height: heightPerItem)
     }
 
