@@ -12,7 +12,8 @@ class TeamPlayersTableViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        let cellNib = UINib(nibName: "PlayerCell", bundle: nil)
+        self.tableView.register(cellNib, forCellReuseIdentifier: "myCell")
     
         viewModel.fetchData {
             self.tableView.reloadData()
@@ -63,7 +64,7 @@ class TeamPlayersTableViewController: UITableViewController {
             return cell
         }
         else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "playercellid", for: indexPath) as! PlayerCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath) as! PlayerCell
             
             var curr = viewModel.getPlayerAtIndex(i: indexPath.row-1)
             cell.numberLabel.text = curr.playerNumber

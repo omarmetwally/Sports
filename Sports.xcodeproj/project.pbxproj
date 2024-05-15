@@ -48,6 +48,7 @@
 		BB5D29702BEF68C100C0A0F3 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5D296F2BEF68C100C0A0F3 /* TestViewController.swift */; };
 		BB81FA882BEFBDE2000385C1 /* CoreDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81FA872BEFBDE2000385C1 /* CoreDataServices.swift */; };
 		BB81FA8C2BEFF297000385C1 /* TeamSmallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB81FA8B2BEFF297000385C1 /* TeamSmallCell.swift */; };
+		BBDAFE592BF4E31700CCF602 /* PlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBDAFE582BF4E31700CCF602 /* PlayerCell.xib */; };
 		BBDE73572BEE522300CA5E04 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE73562BEE522300CA5E04 /* TabBarViewController.swift */; };
 		BBDE73592BEE5A0900CA5E04 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE73582BEE5A0900CA5E04 /* HomeViewController.swift */; };
 		BBDE735B2BEE60D700CA5E04 /* TeamDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDE735A2BEE60D700CA5E04 /* TeamDetailsViewController.swift */; };
@@ -114,6 +115,7 @@
 		BB5D296F2BEF68C100C0A0F3 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		BB81FA872BEFBDE2000385C1 /* CoreDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServices.swift; sourceTree = "<group>"; };
 		BB81FA8B2BEFF297000385C1 /* TeamSmallCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSmallCell.swift; sourceTree = "<group>"; };
+		BBDAFE582BF4E31700CCF602 /* PlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerCell.xib; sourceTree = "<group>"; };
 		BBDE73562BEE522300CA5E04 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BBDE73582BEE5A0900CA5E04 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		BBDE735A2BEE60D700CA5E04 /* TeamDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailsViewController.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				BB5D29692BEF5A2A00C0A0F3 /* TeamPlayersTableViewController.swift */,
 				BBDE735A2BEE60D700CA5E04 /* TeamDetailsViewController.swift */,
 				BB16A6242BEE7FD000E201A4 /* DetailListTableViewController.swift */,
+				BBDAFE582BF4E31700CCF602 /* PlayerCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBDAFE592BF4E31700CCF602 /* PlayerCell.xib in Resources */,
 				07B62F8A2BECC75B00A2814B /* LaunchScreen.storyboard in Resources */,
 				07B62F872BECC75B00A2814B /* Assets.xcassets in Resources */,
 				07B62F822BECC75400A2814B /* Main.storyboard in Resources */,
