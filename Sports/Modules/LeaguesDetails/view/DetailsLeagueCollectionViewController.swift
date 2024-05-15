@@ -58,6 +58,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
     func fetchLatestResultsData() {
         viewModel.fetchLatestResults {
             self.fetchGroup.leave()
+
             
         }
     }
@@ -79,9 +80,13 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             case .latestResults:
                 sectionLayout = self.createLatestResultsSectionLayout()
             case .teams:
-                sectionLayout = self.createTeamsSectionLayout()
+                if self.viewModel.sportName == .tennis{
+                    sectionLayout = self.createLatestResultsSectionLayout()
+                }else{
+                    sectionLayout = self.createTeamsSectionLayout()
+                    
+                }
             }
-            
             let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
             sectionLayout?.boundarySupplementaryItems = [header]
@@ -158,7 +163,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
     
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return SectionType.allCases.count
+        return viewModel.sportName == .tennis ? 2 : SectionType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -169,7 +174,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         case .latestResults:
             return max (1,viewModel.latestResults.count)
         case .teams:
-            return max (1,viewModel.teams.count)
+            return viewModel.sportName == .tennis ?  max (1,viewModel.latestResults.count) : max (1,viewModel.teams.count)
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -205,6 +210,9 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
             return cell
         case .teams:
+            if self.viewModel.sportName == .tennis{
+               return cellConfigureForTennis(collectionView, cellForItemAt: indexPath)
+            }
             if viewModel.teams.isEmpty {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath) as! PlaceholderCollectionViewCell
                 return cell
@@ -241,7 +249,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
                 case .latestResults:
                     headerView.configure(with: "Latest Results")
                 case .teams:
-                    headerView.configure(with: "Teams")
+                    headerView.configure(with: self.viewModel.sportName == .tennis ? "Latest Results" : "Teams")
                 }
             }
         }else{
@@ -252,14 +260,27 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
         return headerView
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 2{
-            print(viewModel.teams[indexPath.row].teamKey ?? 0)
+        if indexPath.section == 1{
             let screen = storyboard?.instantiateViewController(withIdentifier: "teamdetails") as! TeamPlayersTableViewController
             let viewModel = TeamViewModel.init(network: NetworkServices(), sport: viewModel.sportName, id: viewModel.teams[indexPath.row].teamKey ?? 0)
             screen.viewModel=viewModel
             
             navigationController?.pushViewController(screen, animated: true)
         }
+    }
+    func cellConfigureForTennis(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->UICollectionViewCell {
+        if viewModel.latestResults.isEmpty {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PlaceholderCell", for: indexPath) as! PlaceholderCollectionViewCell
+            return cell
+        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EventCell", for: indexPath) as? EventCollectionViewCell else {
+            fatalError("EventCell not found")
+        }
+        let event = (indexPath.section == SectionType.upcomingEvents.rawValue) ? viewModel.events[indexPath.row] : viewModel.latestResults[indexPath.row]
+        cell.configure(with: event)
+        cell.contentView.layer.borderWidth = 2
+        cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        return cell
     }
     
     @IBAction func favBtnAction(_ sender: Any) {
