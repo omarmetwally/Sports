@@ -18,6 +18,9 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Table viewDidLoad")
+        let nib = UINib(nibName: "LeagueCell", bundle: nil)
+           tableView.register(nib, forCellReuseIdentifier: "LeagueCell")
+            
         self.navigationItem.title="Leagues"
         activityIndicator = Helper.setupActivityIndicator(in: self.tableView)
         setupViewModelForFavorite()
@@ -34,6 +37,7 @@ class TableViewController: UITableViewController {
             
         }
     }
+    
     private func setupViewModelForFavorite() {
         if viewModel == nil {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -54,7 +58,7 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 150.0
     }
     
     

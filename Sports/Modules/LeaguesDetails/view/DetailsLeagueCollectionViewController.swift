@@ -191,7 +191,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
                 fatalError("EventCell not found")
             }
             let event = (indexPath.section == SectionType.upcomingEvents.rawValue) ? viewModel.events[indexPath.row] : viewModel.latestResults[indexPath.row]
-            cell.configure(with: event)
+            cell.configure(with: event,sport: viewModel.sportName)
             cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
             cell.scoreLabel.isHidden=true
@@ -205,7 +205,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
                 fatalError("EventCell not found")
             }
             let event = (indexPath.section == SectionType.upcomingEvents.rawValue) ? viewModel.events[indexPath.row] : viewModel.latestResults[indexPath.row]
-            cell.configure(with: event)
+            cell.configure(with: event,sport: viewModel.sportName)
             cell.contentView.layer.borderWidth = 2
             cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
             return cell
@@ -277,7 +277,7 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             fatalError("EventCell not found")
         }
         let event = (indexPath.section == SectionType.upcomingEvents.rawValue) ? viewModel.events[indexPath.row] : viewModel.latestResults[indexPath.row]
-        cell.configure(with: event)
+        cell.configure(with: event,sport: viewModel.sportName)
         cell.contentView.layer.borderWidth = 2
         cell.contentView.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         return cell

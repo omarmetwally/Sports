@@ -14,14 +14,30 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.size.width/2 - 10, height: UIScreen.main.bounds.size.height/4)
+        let itemsPerRow: CGFloat = 2
+        let sectionInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = collectionView.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        let heightPerItem = widthPerItem * 1.25 
+        return CGSize(width: widthPerItem, height: heightPerItem)
     }
+
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let initialTransform = CGAffineTransform(translationX: -100, y: 0)
+        cell.transform = initialTransform
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.7, delay: 0.7, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseInOut, animations: {
+            cell.transform = CGAffineTransform.identity
+            cell.alpha = 1
+        })
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
@@ -65,8 +81,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 leagueListScreen.viewModel = viewModel
                 navigationController?.pushViewController(leagueListScreen, animated: true)
             }        } else {
-            Helper.presentNetworkAlert(from: self)
-        }
+                Helper.presentNetworkAlert(from: self)
+            }
         
     }
     
@@ -77,7 +93,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        images = ["football","basketball","tennis","cricket"]
+        images = ["FOOTBALL","BASKETBALL","TENNIS","CRICKET"]
         
         
         // Register cell classes
@@ -97,4 +113,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
      }
      */
     
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
 }
