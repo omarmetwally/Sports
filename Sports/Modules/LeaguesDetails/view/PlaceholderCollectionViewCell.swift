@@ -26,8 +26,8 @@ class PlaceholderCollectionViewCell: UICollectionViewCell {
         messageImageView.translatesAutoresizingMaskIntoConstraints = false
         messageImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         messageImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        messageImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
+        messageImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
         messageImageView.heightAnchor.constraint(equalTo: messageImageView.widthAnchor).isActive = true
-        messageImageView.image = UIImage(named: "noDataFound")
+        messageImageView.image = UIImage(named: "NO_DATA_FOUND")
     }
 }

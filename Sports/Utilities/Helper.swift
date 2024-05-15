@@ -11,7 +11,7 @@ class Helper {
     static func setupActivityIndicator(in view: UIView) -> UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = .black
-        activityIndicator.transform = CGAffineTransform(scaleX: 8, y: 8)
+        activityIndicator.transform = CGAffineTransform(scaleX: 2, y: 2)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(activityIndicator)
         
