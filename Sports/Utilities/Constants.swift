@@ -36,6 +36,7 @@ struct Constants {
 
 enum SectionType: Int, CaseIterable {
     case upcomingEvents
-    case latestResults
     case teams
+    case latestResults
+    
 }
