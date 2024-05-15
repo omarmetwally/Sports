@@ -9,7 +9,7 @@ import Foundation
 
 struct EventsResponse: Codable {
     let success: Int
-    let result: [Event]
+    let result: [Event]?
 }
 
 

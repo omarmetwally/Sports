@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0703D39E2BF3D8E10059AA2F /* PlaceholderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0703D39D2BF3D8E10059AA2F /* PlaceholderCollectionViewCell.swift */; };
 		0704BDDF2BF37E3D006AE117 /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDDE2BF37E3D006AE117 /* MockNetworkService.swift */; };
 		0704BDE12BF37F56006AE117 /* NetworkServiceMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDE02BF37F56006AE117 /* NetworkServiceMockTests.swift */; };
 		0704BDE52BF38757006AE117 /* NetworkServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0704BDE42BF38757006AE117 /* NetworkServicesTests.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0703D39D2BF3D8E10059AA2F /* PlaceholderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderCollectionViewCell.swift; sourceTree = "<group>"; };
 		0704BDDE2BF37E3D006AE117 /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		0704BDE02BF37F56006AE117 /* NetworkServiceMockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMockTests.swift; sourceTree = "<group>"; };
 		0704BDE42BF38757006AE117 /* NetworkServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesTests.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				07210B9B2BEF845C00EC7DBE /* DetailsLeagueCollectionViewController.swift */,
 				07210B9F2BEFA99C00EC7DBE /* SectionHeaderView.swift */,
 				BB81FA8B2BEFF297000385C1 /* TeamSmallCell.swift */,
+				0703D39D2BF3D8E10059AA2F /* PlaceholderCollectionViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				BB5D296E2BEF5C8500C0A0F3 /* PlayerCell.swift in Sources */,
 				07B630192BEEA9A800A2814B /* LeaguesViewModel.swift in Sources */,
 				07B630042BEEA5A700A2814B /* NetworkServices.swift in Sources */,
+				0703D39E2BF3D8E10059AA2F /* PlaceholderCollectionViewCell.swift in Sources */,
 				BB5D29682BEF476100C0A0F3 /* TeamViewModel.swift in Sources */,
 				07B62F7B2BECC75400A2814B /* AppDelegate.swift in Sources */,
 				BB5D29702BEF68C100C0A0F3 /* TestViewController.swift in Sources */,

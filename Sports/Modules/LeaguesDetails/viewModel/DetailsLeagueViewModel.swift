@@ -46,14 +46,22 @@ class DetailsLeagueViewModel: DetailLeagueViewModelProtocol {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let startDate = dateFormatter.string(from: Date())
-        let endDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 10, to: Date())!)
+        var endDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 356, to: Date())!)
         
-        let endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
+        var endpoint = "Fixtures&leagueId=\(leagueId)&from=\(startDate)&to=\(endDate)"
+        
+        if sportName == .tennis{
+             endDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: 25, to: Date())!)
+            
+             endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
+            
+        }
+        
         networkService.fetchData(sport: sportName, endpoint: endpoint, decodingType: EventsResponse.self) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let eventsResponse):
-                    self?.events = eventsResponse.result.reversed()
+                    self?.events = eventsResponse.result?.reversed() ?? []
                     completion()
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
@@ -68,14 +76,21 @@ class DetailsLeagueViewModel: DetailLeagueViewModelProtocol {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
         let endDate = dateFormatter.string(from: yesterday)
-        let startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -2, to: Date())!)
+        var startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -356, to: Date())!)
         
-        let endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
+        var endpoint = "Fixtures&leagueId=\(leagueId)&from=\(startDate)&to=\(endDate)"
+        if sportName == .tennis{
+      
+             startDate = dateFormatter.string(from: Calendar.current.date(byAdding: .day, value: -5, to: Date())!)
+            
+             endpoint = "Fixtures&leagueid=\(leagueId)&from=\(startDate)&to=\(endDate)"
+            
+        }
         networkService.fetchData(sport: sportName, endpoint: endpoint, decodingType: EventsResponse.self) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let eventsResponse):
-                    self?.latestResults = eventsResponse.result
+                    self?.latestResults = eventsResponse.result ?? []
                     completion()
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")

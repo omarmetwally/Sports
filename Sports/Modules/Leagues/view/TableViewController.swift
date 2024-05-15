@@ -13,7 +13,8 @@ class TableViewController: UITableViewController {
     private var activityIndicator: UIActivityIndicatorView!
     private var emptyBackgroundView: UIView?
     private var isNetworkAvailable = true
-    
+    private var isFavorite = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Table viewDidLoad")
@@ -39,6 +40,7 @@ class TableViewController: UITableViewController {
             let managedContext = appDelegate.persistentContainer.viewContext
             let coreDataService = CoreDataServices(managedContext: managedContext)
             viewModel = FavoriteLeaguesViewModel(coreDataService: coreDataService)
+            isFavorite=true
         }
     }
     
@@ -120,7 +122,7 @@ class TableViewController: UITableViewController {
     func updateTableBackground() {
         if viewModel?.leagues.isEmpty ?? true {
             if emptyBackgroundView == nil {
-                let noDataImage = UIImage(named: "noFavorite")
+                let noDataImage = UIImage(named: "noFavoritess")
                 let imageView = UIImageView(image: noDataImage)
                 imageView.contentMode = .scaleAspectFit
                 imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,8 +144,13 @@ class TableViewController: UITableViewController {
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appdelegate.persistentContainer.viewContext
         let selectedLeague = viewModel!.leagues[indexPath.row]
+        var sportOfLeague =  viewModel!.sport
+        if isFavorite{
+            sportOfLeague = selectedLeague.sport
+        }
+        
         if let detailsVC = storyboard?.instantiateViewController(withIdentifier: "DetailsLeagueCollectionViewController") as? DetailsLeagueCollectionViewController {
-            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey), sportName: viewModel!.sport ?? .football, league: selectedLeague)
+            detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey), sportName: sportOfLeague ?? .football, league: selectedLeague)
             detailsVC.viewModel.delegate = self
             let navigationController = UINavigationController(rootViewController: detailsVC)
             navigationController.modalPresentationStyle = .popover
