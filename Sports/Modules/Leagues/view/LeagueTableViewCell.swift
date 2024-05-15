@@ -16,12 +16,12 @@ class LeagueTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupCardStyle()
-
+        
     }
     
     func configure(with league: League) {
         let processor = DownsamplingImageProcessor(size: leagueLogoImageView.bounds.size)
-        |> RoundCornerImageProcessor(cornerRadius: 50)
+        |> RoundCornerImageProcessor(cornerRadius: 40)
         leagueNameLabel.text = league.leagueName
         //        countryNameLabel.text = league.countryName
         
@@ -47,6 +47,11 @@ class LeagueTableViewCell: UITableViewCell {
         layer.shadowOpacity = 0.8
         layer.masksToBounds = false
         layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
+        leagueLogoImageView.layer.borderWidth = 1
+        leagueLogoImageView.layer.borderColor = UIColor.black.cgColor
+        leagueLogoImageView.layer.cornerRadius = 40
+        leagueLogoImageView.contentMode = .scaleAspectFit
+        leagueLogoImageView.clipsToBounds = true
     }
     
     override func layoutSubviews() {
@@ -59,6 +64,6 @@ class LeagueTableViewCell: UITableViewCell {
     }
     
     
-
+    
 }
 

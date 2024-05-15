@@ -18,11 +18,14 @@ class EventCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var homeTeamNameLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    func configure(with event: Event) {
+    func configure(with event: Event, sport:Sport) {
         
         
         let processor = DownsamplingImageProcessor(size: homeTeamLogoImageView.bounds.size)
         |> RoundCornerImageProcessor(cornerRadius: 25)
+        
+        let placeholderImageName = sport == .tennis ? "playericon" : "badge-placeholder"
+
         
         awayTeamNameLabel.text = event.awayTeam
         homeTeamNameLabel.text=event.homeTeam
@@ -34,9 +37,9 @@ class EventCollectionViewCell: UICollectionViewCell {
         homeTeamLogoImageView.kf.indicatorType = .activity
         homeTeamLogoImageView.kf.setImage(
             with: event.homeTeamLogo,
-            placeholder: UIImage(named: "badge-placeholder"),
+            placeholder: UIImage(named: placeholderImageName),
             options: [
-                .processor(processor),
+//                .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
                 .cacheOriginalImage
@@ -46,14 +49,13 @@ class EventCollectionViewCell: UICollectionViewCell {
         awayTeamLogoImageView.kf.indicatorType = .activity
         awayTeamLogoImageView.kf.setImage(
             with: event.awayTeamLogo,
-            placeholder: UIImage(named: "badge-placeholder"),
+            placeholder: UIImage(named: placeholderImageName),
             options: [
-                .processor(processor),
+//                .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
                 .transition(.fade(1)),
                 .cacheOriginalImage
             ])
-        
         
     }
 }
