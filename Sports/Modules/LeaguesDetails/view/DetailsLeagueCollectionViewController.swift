@@ -9,6 +9,8 @@ import UIKit
 
 class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
     @IBOutlet weak var collectionView: UICollectionView!
+    
+ 
     var viewModel: DetailLeagueViewModelProtocol!
     private var activityIndicator: UIActivityIndicatorView!
     var isFav:Bool = false
@@ -301,4 +303,13 @@ class DetailsLeagueCollectionViewController: UIViewController,UICollectionViewDe
             }
         }
     }
+    @IBAction func backBtnAction(_ sender: UIButton) {
+        
+        if let navController = navigationController, navController.viewControllers.count > 1 {
+            navController.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
 }

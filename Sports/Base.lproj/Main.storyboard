@@ -691,7 +691,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kYr-em-I5a">
-                                <rect key="frame" x="0.0" y="76" width="610" height="736"/>
+                                <rect key="frame" x="0.0" y="82" width="610" height="780"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DRX-Qf-zfj">
                                     <size key="itemSize" width="128" height="128"/>
@@ -845,10 +845,10 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akH-Ml-upw">
-                                <rect key="frame" x="527" y="40" width="67" height="64"/>
+                                <rect key="frame" x="535" y="31" width="67" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="3Oi-kv-a3k"/>
-                                    <constraint firstAttribute="height" constant="64" id="otS-ZY-J2H"/>
+                                    <constraint firstAttribute="height" constant="64" id="Cxu-e5-9Pb"/>
+                                    <constraint firstAttribute="width" constant="67" id="quZ-7o-qGw"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="favourite"/>
@@ -856,16 +856,30 @@
                                     <action selector="favBtnAction:" destination="PyV-TG-YBN" eventType="touchUpInside" id="E2h-du-J3m"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FQ1-cR-mUr">
+                                <rect key="frame" x="8" y="57" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="Kwj-kD-8iU"/>
+                                    <constraint firstAttribute="height" constant="31" id="sh2-bc-6n5"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.backward.2" catalog="system"/>
+                                <connections>
+                                    <action selector="backBtnAction:" destination="PyV-TG-YBN" eventType="touchUpInside" id="5fh-sS-lnY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WXd-5i-63y"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WXd-5i-63y" firstAttribute="trailing" secondItem="akH-Ml-upw" secondAttribute="trailing" constant="16" id="2Oz-w8-FSn"/>
-                            <constraint firstItem="kYr-em-I5a" firstAttribute="top" secondItem="WXd-5i-63y" secondAttribute="top" constant="32" id="I8e-6Y-Qcc"/>
+                            <constraint firstItem="FQ1-cR-mUr" firstAttribute="top" secondItem="WXd-5i-63y" secondAttribute="top" constant="13" id="2vl-ws-brU"/>
+                            <constraint firstItem="kYr-em-I5a" firstAttribute="top" secondItem="FQ1-cR-mUr" secondAttribute="top" constant="25" id="I8e-6Y-Qcc"/>
+                            <constraint firstItem="FQ1-cR-mUr" firstAttribute="leading" secondItem="WXd-5i-63y" secondAttribute="leading" constant="8" id="Kya-kE-jEu"/>
                             <constraint firstItem="kYr-em-I5a" firstAttribute="trailing" secondItem="WXd-5i-63y" secondAttribute="trailing" id="OrJ-sc-cho"/>
                             <constraint firstItem="kYr-em-I5a" firstAttribute="leading" secondItem="WXd-5i-63y" secondAttribute="leading" id="Zy3-yk-3zo"/>
-                            <constraint firstItem="WXd-5i-63y" firstAttribute="bottom" secondItem="kYr-em-I5a" secondAttribute="bottom" constant="50" id="etp-al-gy9"/>
-                            <constraint firstItem="akH-Ml-upw" firstAttribute="top" secondItem="hiD-CJ-bDt" secondAttribute="top" constant="40" id="ibW-SV-Dbf"/>
+                            <constraint firstItem="WXd-5i-63y" firstAttribute="top" secondItem="akH-Ml-upw" secondAttribute="top" constant="13" id="e0N-TY-pm1"/>
+                            <constraint firstItem="WXd-5i-63y" firstAttribute="bottom" secondItem="kYr-em-I5a" secondAttribute="bottom" id="etp-al-gy9"/>
+                            <constraint firstItem="WXd-5i-63y" firstAttribute="trailing" secondItem="akH-Ml-upw" secondAttribute="trailing" constant="8" id="xvO-VM-NMM"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="610" height="896"/>
@@ -903,6 +917,7 @@
         <image name="Instagram_icon" width="800" height="800"/>
         <image name="Logo_of_Twitter.svg" width="2491" height="2049"/>
         <image name="appSplash" width="500" height="350"/>
+        <image name="arrowshape.turn.up.backward.2" catalog="system" width="128" height="86"/>
         <image name="b24a16226a41ebbbca826868cc4d8eec" width="600" height="400"/>
         <image name="favourite" width="24" height="24"/>
         <image name="greenwarning" width="390" height="180"/>

@@ -157,7 +157,7 @@ class TableViewController: UITableViewController {
             detailsVC.viewModel = DetailsLeagueViewModel(networkService: NetworkServices(), coreDataService: CoreDataServices(managedContext: managedContext), leagueId: String(selectedLeague.leagueKey), sportName: sportOfLeague ?? .football, league: selectedLeague)
             detailsVC.viewModel.delegate = self
             let navigationController = UINavigationController(rootViewController: detailsVC)
-            navigationController.modalPresentationStyle = .popover
+            navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         }
         
